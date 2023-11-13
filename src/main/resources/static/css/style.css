@@ -1,0 +1,424 @@
+:root {
+    --red: #ed2647;
+    --red-hover: #fa4764;
+    --border-black: #707070;
+    --lighter-gray: #cbcbcb;
+    --lightgray: #898989;
+}
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* Base */
+body {
+    font-family: sans-serif;
+    font-weight: 400;
+    color: #000;
+    font-size: 1.125rem;
+    min-height: 100vh;
+}
+
+main {
+    min-height: 80vh;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+    transition: .2s;
+}
+
+a:hover {
+    color: var(--red);
+    text-decoration: none;
+}
+
+li {
+    list-style-type: none;
+}
+
+p {
+    letter-spacing: 1px;
+    line-height: 34px;
+    margin: 0;
+}
+
+ul {
+    margin: 0;
+}
+
+h1 {
+    font-size: 2.875rem;
+    letter-spacing: 2px;
+}
+
+h2 {
+    font-size: 1.5rem;
+    color: #424242;
+    font-weight: 100;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+h3 {
+    font-size: 1.25rem;
+    letter-spacing: 1px;
+}
+
+/* Shell */
+.shell {
+    max-width: 1480px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.shell--small {
+    max-width: 1200px;
+}
+
+/* Grid */
+.grid {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    margin: 40px -15px 0 -15px;
+    border-top: 1px solid var(--lighter-gray);
+    border-left: 1px solid var(--lighter-gray);
+}
+
+.grid .grid__col {
+    max-width: 100%;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    padding: 0 15px;
+    justify-content: center;
+    border-right: 1px solid var(--lighter-gray);
+    border-bottom: 1px solid var(--lighter-gray);
+}
+
+.grid .grid__col--1of2 {
+    max-width: 50%;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.grid .grid__col--1of3 {
+    max-width: calc(100% / 3);
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 calc(100% / 3);
+    flex: 0 0 calc(100% / 3);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.grid .grid__col--1of4 {
+    max-width: 25%;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 25%;
+    flex: 0 0 25%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.grid .grid__col--1of5 {
+    max-width: 20%;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 20%;
+    flex: 0 0 20%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.grid-no-gutter {
+    margin: 0;
+}
+
+/* Buttons */
+.button {
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    transition: .2s;
+}
+
+.button--search {
+    background-color: var(--red);
+    padding: 10px;
+}
+
+.button--search:hover {
+    background-color: var(--red-hover);
+}
+
+
+/* Header */
+.header {
+    height: 150px;
+}
+
+.header__inner {
+    height: 150px;
+}
+
+.header__top,
+.header__bottom {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__top {
+    height: 100px;
+}
+
+.header__bottom {
+    height: 50px;
+}
+
+.header__top .header__logo img {
+    width: 50%;
+    height: auto;
+}
+
+.header__top .header__search {
+    background-color: #eaeaea;
+}
+
+.header__top .header__search input {
+    width: 250px;
+    padding: 10px;
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+
+.header__bottom .header__categories ul,
+.header__bottom .header__profile ul {
+    display: flex;
+}
+
+.header__bottom .header__categories li + li,
+.header__bottom .header__profile li + li {
+    margin-left: 20px;
+}
+
+.header__bottom {
+    border-top: 1px solid var(--border-black);
+    border-bottom: 1px solid var(--border-black);
+}
+
+/* Footer */
+.footer {
+    margin-top: 180px;
+    height: 80px;
+    background-color: #eeeeee;
+}
+
+.footer__inner {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.footer__inner nav ul {
+    display: flex;
+}
+
+.footer__inner nav ul li + li {
+    margin-left: 20px;
+}
+
+/*Section Slider */
+.section-slider {
+    margin-top: 20px;
+}
+
+.section-slider__inner {
+    width: 75%;
+    margin: 0 auto;
+}
+
+/* Section Top Products */
+.section-top-products {
+    margin-top: 120px;
+}
+
+/* Card */
+.card {
+    width: 100%;
+}
+
+.card .card__image {
+    width: 100%;
+    overflow: hidden;
+}
+
+.card .card__image img {
+    width: 100%;
+    height: 250px;
+    object-fit: contain;
+    transition: transform .2s ease-in-out;
+}
+
+.card .card__image a:hover img {
+    transform: scale(1.1);
+}
+
+.card .card__body {
+    margin: 30px 0 10px 0;
+}
+
+.card .card__title {
+    width: auto;
+}
+
+.card .card__price {
+    margin-top: 20px;
+    display: flex;
+}
+
+.card .card__text p {
+   overflow: hidden;
+   display: -webkit-box;
+   -webkit-line-clamp: 3;
+           line-clamp: 3;
+   -webkit-box-orient: vertical;
+}
+
+.card .card__old-price {
+    margin-left: 20px;
+    position: relative;
+    color: var(--lightgray);
+}
+
+.card .card__old-price:after {
+    content: "";
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    background-color: var(--lightgray);
+    transform: translateY(-50%) rotate(-10deg);
+}
+
+.card .card__profile-name {
+    margin-top: 30px;
+}
+
+.card .card__posted-on {
+    margin-top: 10px;
+}
+
+/**
+* * Hamburger
+*/
+.hamburger {
+    display: none;
+    cursor: pointer;
+}
+
+/**
+* * Bar
+*/
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    background-color: var(--red);
+}
+
+/* Rating */
+.rating-group {
+    display: inline-flex;
+}
+
+/* make hover effect work properly in IE */
+.rating__icon {
+pointer-events: none;
+}
+
+/* hide radio inputs */
+.rating__input {
+position: absolute !important;
+left: -9999px !important;
+}
+
+/* set icon padding and size */
+.rating__label {
+cursor: pointer;
+padding: 0 0.1em;
+font-size: 2rem;
+}
+
+/* set default star color */
+.rating__icon--star {
+color: orange;
+}
+
+/* set color of none icon when unchecked */
+.rating__icon--none {
+color: #eee;
+}
+
+/* if none icon is checked, make it red */
+.rating__input--none:checked + .rating__label .rating__icon--none {
+color: red;
+}
+
+/* if any input is checked, make its following siblings grey */
+.rating__input:checked ~ .rating__label .rating__icon--star {
+color: #ddd;
+}
+
+/* make all stars orange on rating group hover */
+.rating-group:hover .rating__label .rating__icon--star {
+color: orange;
+}
+
+/* make hovered input's following siblings grey on hover */
+.rating__input:hover ~ .rating__label .rating__icon--star {
+color: #ddd;
+}
+
+/* make none icon grey on rating group hover */
+.rating-group:hover .rating__input--none:not(:hover) + .rating__label .rating__icon--none {
+ color: #eee;
+}
+
+/* make none icon red on hover */
+.rating__input--none:hover + .rating__label .rating__icon--none {
+color: red;
+}
+
+.rating__icon.no-active {
+    color: #ddd;
+}
+
+/* Section Testimonials */
+.section-testimonials {
+    margin-top: 120px;
+}
