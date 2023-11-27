@@ -8,5 +8,5 @@ $(document).ready(function () {
         } else {
             $('body,html').css('overflow','scroll');
         }
-    })
+    });
 });

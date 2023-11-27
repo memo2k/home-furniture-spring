@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/commons::head}"></head>
+<body>
+<header th:replace="~{fragments/commons::header}"></header>
+<main>
+    <section class="section-orders-history mt-5">
+        <div class="shell">
+            <div class="mb-5">
+                <h1>Your Orders</h1>
+            </div>
+
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Order Number</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">175</th>
+                  <td>20.08.2023</td>
+                  <td>Accepted</td>
+                  <td>$89.99</td>
+                </tr>
+                <tr>
+                  <th scope="row">263</th>
+                  <td>11.11.2023</td>
+                  <td>Pending</td>
+                  <td>$499.99</td>
+                </tr>
+                <tr>
+                  <th scope="row">3523</th>
+                  <td>02.12.2023</td>
+                  <td>Accepted</td>
+                  <td>$129.99</td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+<footer th:replace="~{fragments/commons::footer}"></footer>
+</body>
+</html>
