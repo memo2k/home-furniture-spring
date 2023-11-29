@@ -7,26 +7,26 @@
 <main>
     <section class="section-auth">
         <div class="shell">
-            <form action="" class='pad-bg form-auth'>
+            <form th:method="POST" th:action="@{/users/register}" class='pad-bg form-auth'>
                 <h1 class="text-center">Register</h1>
                 <div class="form-group">
-                  <label for="">Username</label>
-                  <input type="text" class="i-box form-control input-lg" />
+                  <label for="username">Username</label>
+                  <input type="text" id="username" name="username" class="i-box form-control input-lg" />
                 </div>
 
                 <div class="form-group">
-                  <label for="">Email</label>
-                  <input type="text" class="i-box form-control input-lg" />
+                  <label for="email">Email</label>
+                  <input type="text" id="email" name="email" class="i-box form-control input-lg" />
                 </div>
 
                 <div class="form-group">
-                  <label for="">Password</label>
-                  <input type="text" class="form-control input-lg" />
+                  <label for="password">Password</label>
+                  <input type="password" id="password" name="password" class="form-control input-lg" />
                 </div>
 
                 <div class="form-group">
-                  <label for="">Confirm Password</label>
-                  <input type="text" class="form-control input-lg" />
+                  <label for="confirmPassword">Confirm Password</label>
+                  <input type="password" id="confirmPassword" name="confirmPassword" class="form-control input-lg" />
                 </div>
 
                 <button type="submit" class="btn btn-primary my-4">Register</button>
