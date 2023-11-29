@@ -8,11 +8,11 @@ import org.springframework.web.servlet.ModelAndView;
 public class OrderController {
     @GetMapping("/orders-history")
     public ModelAndView ordersHistory() {
-        return new ModelAndView("orders-history.html");
+        return new ModelAndView("orders-history");
     }
 
     @GetMapping("/checkout")
     public ModelAndView orderProducts() {
-        return new ModelAndView("checkout.html");
+        return new ModelAndView("checkout");
     }
 }
