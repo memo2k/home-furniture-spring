@@ -1,0 +1,24 @@
+spring:
+    datasource:
+        driverClassName: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/homefurniture?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
+        password: ${db_password}
+        username: ${db_username}
+    jpa:
+        database-platform: org.hibernate.dialect.MySQLDialect
+        defer-datasource-initialization: true
+        hibernate:
+            ddl-auto: update
+        open-in-view: false
+        properties:
+            hibernate:
+                format_sql: true
+    thymeleaf: # Thymeleaf
+        cache: false
+        mode: HTML
+        encoding: UTF-8
+        prefix: file:src/main/resources/templates/
+    resources: # Static resources
+        static-locations: file:src/main/resources/static/
+        cache:
+            period: 0
