@@ -25,7 +25,7 @@
         <div class="header__inner">
             <div class="header__top">
                 <div class="header__logo">
-                    <a href="#">
+                    <a th:href="@{/}">
                         <img src="/images/logo.png" alt="">
                     </a>
                 </div>
@@ -69,9 +69,9 @@
                 </nav>
 
                 <div class="header__profile">
-                    <ul>
+                    <ul th:if="${@loggedUser.isLogged}">
                         <li>
-                            <a href="#" type="button" data-toggle="modal" data-target="#cartModal"><i class="fa-solid fa-cart-shopping"></i></a>
+                            <a type="button" data-toggle="modal" data-target="#cartModal"><i class="fa-solid fa-cart-shopping"></i> Cart</a>
 
                             <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                               <div class="modal-dialog" role="document">
@@ -85,40 +85,12 @@
                                   <div class="modal-body">
                                     <div class="modal-cart">
                                         <div class="mb-4">
-                                            <div class="modal-cart__item d-flex align-items-center mb-3">
+                                            <div th:each="product : ${produts}" class="modal-cart__item d-flex align-items-center mb-3">
                                                 <a href="#" class="modal-cart__image col-2">
                                                     <img src="/images/product2.jpg" class="img-fluid" alt="">
                                                 </a>
 
                                                 <a href="#" class="col-6">Divan desen</a>
-
-                                                <p class="col-1">x2</p>
-
-                                                <p class="col-2">$89.99</p>
-
-                                                <button type="button" class="btn btn-outline-secondary col-1"><i class="fa fa-times"></i></button>
-                                            </div>
-
-                                            <div class="modal-cart__item d-flex align-items-center mb-3">
-                                                <a href="#" class="modal-cart__image col-2">
-                                                    <img src="/images/product3.jpg" class="img-fluid" alt="">
-                                                </a>
-
-                                                <a href="#" class="col-6">Divan desen ugul</a>
-
-                                                <p class="col-1">x2</p>
-
-                                                <p class="col-2">$89.99</p>
-
-                                                <button type="button" class="btn btn-outline-secondary col-1"><i class="fa fa-times"></i></button>
-                                            </div>
-
-                                            <div class="modal-cart__item d-flex align-items-center mb-3">
-                                                <a href="#" class="modal-cart__image col-2">
-                                                    <img src="/images/product2.jpg" class="img-fluid" alt="">
-                                                </a>
-
-                                                <a href="#" class="col-6">Divan</a>
 
                                                 <p class="col-1">x2</p>
 
@@ -141,8 +113,22 @@
                               </div>
                             </div>
                         </li>
-                        <li><a href="#"><i class="fa-solid fa-heart"></i></a></li>
-                        <li><a href="#"><i class="fa-solid fa-user"></i></a></li>
+                        
+                        <li>
+                            <a th:href="@{/favorite-products}"><i class="fa-solid fa-heart"></i> Favorites</a>
+                        </li>
+
+                        <li>
+                            <form th:action="@{/users/logout}" th:method="POST">
+                                <input type="submit" value="Logout">
+                            </form>
+                        </li>
+                    </ul>
+
+                    <ul th:unless="${@loggedUser.isLogged}">
+                        <li><a th:href="@{/users/login}">Login</a></li>
+
+                        <li><a th:href="@{/users/register}">Register</a></li>
                     </ul>
                 </div>
             </div>
