@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/commons::head}"></head>
+<body>
+<header th:replace="~{fragments/commons::header}"></header>
+<main>
+    <div class="section-products-list mt-5">
+        <div class="shell">
+            <div class="mb-5">
+                <h1>Manage Products</h1>
+
+                <a th:href="@{/admin/add-product}" class="btn btn-primary">Add New Product</a>
+            </div>
+
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Image</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Active?</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="align-content-center">
+                  <td class="align-middle">1</td>
+                  <th scope="row" class="section-cart__image">
+                      <a href="#">
+                          <img class="w-100 shadow" src="/images/product4.jpg" />
+                      </a>
+                  </th>
+                  <td class="align-middle">Product 1</td>
+                  <td class="align-middle">
+                      <div class="mb-2 d-flex">
+                          <div class="text-danger">$39.99</div>
+
+                          <div class="old-price">$59.99</div>
+                      </div>
+                  </td>
+                  <td class="align-middle">100</td>
+                  <td class="align-middle">Yes</td>
+                  <td class="align-middle">
+                    <button class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i></button>
+                    <button class="btn btn-outline-danger"><i class="fa-regular fa-trash-can"></i></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="align-middle">2</td>
+                  <th scope="row" class="section-cart__image">
+                      <a href="#">
+                          <img class="w-100 shadow" src="/images/product4.jpg" />
+                      </a>
+                  </th>
+                  <td class="align-middle">Product 2</td>
+                  <td class="align-middle">
+                      <div class="mb-2 d-flex">
+                          <div class="text-danger">$39.99</div>
+
+                          <div class="old-price">$59.99</div>
+                      </div>
+                  </td>
+                  <td class="align-middle">100</td>
+                  <td class="align-middle">Yes</td>
+                  <td class="align-middle">
+                    <button class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i></button>
+                    <button class="btn btn-outline-danger"><i class="fa-regular fa-trash-can"></i></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="align-middle">3</td>
+                  <th scope="row" class="section-cart__image">
+                      <a href="#">
+                          <img class="w-100 shadow" src="/images/product2.jpg" />
+                      </a>
+                  </th>
+                  <td class="align-middle">Product 2</td>
+                  <td class="align-middle">
+                      <div class="mb-2 d-flex">
+                          <div class="text-danger">$39.99</div>
+
+                          <div class="old-price">$59.99</div>
+                      </div>
+                  </td>
+                  <td class="align-middle">100</td>
+                  <td class="align-middle">Yes</td>
+                  <td class="align-middle">
+                    <button class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i></button>
+                    <button class="btn btn-outline-danger"><i class="fa-regular fa-trash-can"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+<footer th:replace="~{fragments/commons::footer}"></footer>
+</body>
+</html>

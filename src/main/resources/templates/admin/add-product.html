@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/commons::head}"></head>
+<body>
+<header th:replace="~{fragments/commons::header}"></header>
+<main>
+    <div style="margin: 100px auto">
+        <form class="form-product" th:action="@{/admin/add-product}" th:method="POST" enctype="multipart/form-data">
+            <h1 class="text-center">Add New Product</h1>
+
+          <div class="form-group mt-5">
+            <label for="name">Name of product</label>
+            <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" placeholder="Name of product...">
+          </div>
+
+          <div class="form-group">
+            <label for="image">Image</label>
+            <input type="file" class="form-control" id="image" name="image">
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" name="description" placeholder="Description..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="price">Price</label>
+            <input type="text" class="form-control" id="price" name="price" placeholder="Price..."></input>
+          </div>
+
+          <div class="form-group">
+            <label for="promotionalPrice">Promotional price</label>
+            <input type="text" class="form-control" id="promotionalPrice" name="promotionalPrice" placeholder="Promotional price..."></input>
+          </div>
+
+          <div class="form-group">
+            <label for="quantity">Quantity</label>
+            <input type="text" class="form-control" id="quantity" name="quantity" placeholder="Quantity..."></input>
+          </div>
+
+          <div class="form-group">
+              <label for="category">Category</label>
+              <select class="custom-select" id="category" name="category" aria-label="Default select example">
+                <option selected disabled>Select category</option>
+                <option th:each="category : ${categories}" th:text="${category}" th:value="${category}"></option>
+              </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</main>
+<footer th:replace="~{fragments/commons::footer}"></footer>
+</body>
+</html>

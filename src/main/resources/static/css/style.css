@@ -438,7 +438,8 @@ color: red;
 }
 
 /* Form Auth */
-.form-auth {
+.form-auth,
+.form-product {
     border-radius: 10px;
     max-width: 550px;
     margin: 0 auto;
@@ -483,4 +484,16 @@ color: red;
     object-fit: contain;
     height: 100%;
     width: auto;
+}
+
+/* Section Cart */
+.section-cart__image {
+    width: 100px;
+    height: 100px;
+}
+
+.section-cart th img {
+    height: 100%;
+    width: auto;
+    object-fit: cover;
 }
