@@ -1,3 +1,7 @@
+function logout() {
+    $('#logout_form').submit();
+}
+
 $(document).ready(function () {
     $('#hamburger').click(function () {
         $('#hamburger').toggleClass('active');
