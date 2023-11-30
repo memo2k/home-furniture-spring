@@ -1,10 +1,13 @@
 package bg.softuni.homefurniture.controller;
 
+import bg.softuni.homefurniture.model.dto.AddProductBindingModel;
 import bg.softuni.homefurniture.model.entity.Product;
+import bg.softuni.homefurniture.model.enums.CategoryName;
 import bg.softuni.homefurniture.service.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -33,8 +36,24 @@ public class ProductController {
         return new ModelAndView("favorite-products");
     }
 
-    @ModelAttribute("products")
-    public List<Product> getAllProducts() {
-        return productService.getAllProducts();
+    @GetMapping("/admin/add-product")
+    public ModelAndView addProduct() {
+        ModelAndView modelAndView = new ModelAndView("admin/add-product");
+
+        modelAndView.addObject("categories", CategoryName.values());
+
+        return modelAndView;
+    }
+
+    @PostMapping("/admin/add-product")
+    public ModelAndView addProduct(AddProductBindingModel addProductBindingModel) {
+        productService.addProduct(addProductBindingModel);
+
+        return new ModelAndView("redirect:/");
+    }
+
+    @GetMapping("/admin/products-list")
+    public ModelAndView productsList() {
+        return new ModelAndView("admin/products-list");
     }
 }

@@ -17,11 +17,17 @@ public class Product extends BaseEntity {
     @Column(name = "description", nullable = false, columnDefinition = "TEXT")
     private String description;
 
+    @Column(name = "image", nullable = false)
+    private String image;
+
     @Column(name = "price", nullable = false)
     private BigDecimal price;
 
     @Column(name = "promotional_price")
     private BigDecimal promotionalPrice;
+
+    @Column(name = "quantity")
+    private Integer quantity;
 
     @Column(name = "created_on", nullable = false)
     private LocalDate createdOn;
@@ -52,6 +58,14 @@ public class Product extends BaseEntity {
         this.description = description;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public BigDecimal getPrice() {
         return price;
     }
@@ -66,6 +80,14 @@ public class Product extends BaseEntity {
 
     public void setPromotionalPrice(BigDecimal promotionalPrice) {
         this.promotionalPrice = promotionalPrice;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
     public LocalDate getCreatedOn() {
