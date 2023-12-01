@@ -6,6 +6,7 @@ import bg.softuni.homefurniture.service.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -24,7 +25,10 @@ public class ProductController {
 
     @GetMapping("/all-products")
     public ModelAndView allProducts() {
-        return new ModelAndView("all-products");
+        ModelAndView modelAndView = new ModelAndView("admin/products-list");
+        modelAndView.addObject("products", productService.getAll());
+
+        return modelAndView;
     }
 
     @GetMapping("/favorite-products")
@@ -50,6 +54,9 @@ public class ProductController {
 
     @GetMapping("/admin/products-list")
     public ModelAndView productsList() {
-        return new ModelAndView("admin/products-list");
+        ModelAndView modelAndView = new ModelAndView("admin/products-list");
+        modelAndView.addObject("products", productService.getAll());
+
+        return modelAndView;
     }
 }

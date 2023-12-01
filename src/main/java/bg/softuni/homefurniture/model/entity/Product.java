@@ -32,7 +32,7 @@ public class Product extends BaseEntity {
     @Column(name = "created_on", nullable = false)
     private LocalDate createdOn;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Category category;
 
     @OneToMany(mappedBy = "product")
