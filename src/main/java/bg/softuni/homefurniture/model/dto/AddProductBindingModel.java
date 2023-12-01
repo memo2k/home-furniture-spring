@@ -1,6 +1,6 @@
 package bg.softuni.homefurniture.model.dto;
 
-import bg.softuni.homefurniture.model.entity.Category;
+import bg.softuni.homefurniture.model.enums.CategoryName;
 
 import java.math.BigDecimal;
 
@@ -17,7 +17,7 @@ public class AddProductBindingModel {
 
     private Integer quantity;
 
-    private Category category;
+    private CategoryName categoryName;
 
     public String getName() {
         return name;
@@ -67,11 +67,11 @@ public class AddProductBindingModel {
         this.quantity = quantity;
     }
 
-    public Category getCategory() {
-        return category;
+    public CategoryName getCategoryName() {
+        return categoryName;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategoryName(CategoryName categoryName) {
+        this.categoryName = categoryName;
     }
 }
