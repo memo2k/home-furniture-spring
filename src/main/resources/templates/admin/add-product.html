@@ -6,17 +6,17 @@
 <header th:replace="~{fragments/commons::header}"></header>
 <main>
     <div style="margin: 100px auto">
-        <form class="form-product" th:action="@{/admin/add-product}" th:method="POST" enctype="multipart/form-data">
+        <form class="form-product" th:action="@{/admin/add-product}" th:method="POST">
             <h1 class="text-center">Add New Product</h1>
 
           <div class="form-group mt-5">
             <label for="name">Name of product</label>
-            <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" placeholder="Name of product...">
+            <input type="text" class="form-control" id="name" name="name" placeholder="Name of product...">
           </div>
 
           <div class="form-group">
             <label for="image">Image</label>
-            <input type="file" class="form-control" id="image" name="image">
+            <input type="text" class="form-control" id="image" name="image">
           </div>
 
           <div class="form-group">
@@ -43,7 +43,7 @@
               <label for="category">Category</label>
               <select class="custom-select" id="category" name="category" aria-label="Default select example">
                 <option selected disabled>Select category</option>
-                <option th:each="category : ${categories}" th:text="${category}" th:value="${category}"></option>
+                <option th:each="category: ${T(bg.softuni.homefurniture.model.enums.CategoryName).values()}" th:text="${#strings.capitalize(category)}" th:value="${category}"></option>
               </select>
           </div>
 
