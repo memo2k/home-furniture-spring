@@ -41,9 +41,11 @@
 
           <div class="form-group">
               <label for="category">Category</label>
-              <select class="custom-select" id="category" name="category" aria-label="Default select example">
+              <select class="custom-select" id="category" name="categoryName" aria-label="Default select example">
                 <option selected disabled>Select category</option>
-                <option th:each="category: ${T(bg.softuni.homefurniture.model.enums.CategoryName).values()}" th:text="${#strings.capitalize(category)}" th:value="${category}"></option>
+                <option th:each="category : ${T(bg.softuni.homefurniture.model.enums.CategoryName).values()}"
+                        th:text="${category}"
+                        th:value="${category}"></option>
               </select>
           </div>
 
