@@ -1,16 +1,12 @@
 package bg.softuni.homefurniture.controller;
 
 import bg.softuni.homefurniture.model.dto.AddProductBindingModel;
-import bg.softuni.homefurniture.model.entity.Product;
 import bg.softuni.homefurniture.model.enums.CategoryName;
 import bg.softuni.homefurniture.service.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
 
 @Controller
 public class ProductController {
@@ -49,7 +45,7 @@ public class ProductController {
     public ModelAndView addProduct(AddProductBindingModel addProductBindingModel) {
         productService.addProduct(addProductBindingModel);
 
-        return new ModelAndView("redirect:/");
+        return new ModelAndView("redirect:/admin/products-list");
     }
 
     @GetMapping("/admin/products-list")
