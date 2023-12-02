@@ -1,4 +1,4 @@
-package bg.softuni.homefurniture.model.dto;
+package bg.softuni.homefurniture.model.dto.binding;
 
 import bg.softuni.homefurniture.model.enums.CategoryName;
 
