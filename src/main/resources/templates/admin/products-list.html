@@ -29,16 +29,18 @@
                 <tr th:each="product: ${products}" class="align-content-center">
                   <td class="align-middle" th:text="${product.id}"></td>
                   <th scope="row" class="section-cart__image">
-                      <a href="#">
+                      <a th:href="@{/product/{id}(id = ${product.id})}">
                           <img class="w-100 shadow" src="/images/product4.jpg" />
                       </a>
                   </th>
                   <td class="align-middle" th:text="${product.name}"></td>
                   <td class="align-middle">
                       <div class="mb-2 d-flex">
-                          <div class="text-danger" th:text="'$' + ${product.price}"></div>
+                          <div th:unless="${product.promotionalPrice}" th:text="'$' + ${product.price}"></div>
 
-                          <div class="old-price" th:text="'$' + ${product.promotionalPrice}"></div>
+                          <div class="text-danger" th:if="${product.promotionalPrice}" th:text="'$' + ${product.promotionalPrice}"></div>
+
+                          <div class="old-price" th:if="${product.promotionalPrice}" th:text="'$' + ${product.price}"></div>
                       </div>
                   </td>
                   <td class="align-middle" th:text="${product.quantity}"></td>
