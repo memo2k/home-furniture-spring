@@ -1,4 +1,4 @@
-package bg.softuni.homefurniture.model.dto;
+package bg.softuni.homefurniture.model.dto.binding;
 
 import jakarta.validation.constraints.Email;
 import org.hibernate.validator.constraints.Length;
