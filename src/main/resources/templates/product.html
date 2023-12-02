@@ -13,38 +13,47 @@
                 </div>
 
                 <div class="section-product__details col-12 col-lg-6">
-                    <h2 class="mb-2">Divan</h2>
+                    <h2 class="mb-2" th:text="${product.name}"></h2>
 
                     <div class="card__rating d-flex align-items-center mb-4">
-                        <div class="rating-group">
-                            <i class="rating__icon rating__icon--star fa fa-star"></i>
-                            <i class="rating__icon rating__icon--star fa fa-star"></i>
-                            <i class="rating__icon rating__icon--star fa fa-star"></i>
-                            <i class="rating__icon rating__icon--star no-active fa fa-star"></i>
-                            <i class="rating__icon rating__icon--star no-active fa fa-star"></i>
+                        <div th:each="i : ${#numbers.sequence(1, 5)}">
+                            <div th:if="${product.rating >= i}">
+                                <i class="rating__icon rating__icon--star fa fa-star"></i>
+                            </div>
+
+                            <div th:unless="${product.rating >= i}">
+                                <i class="rating__icon rating__icon--star no-active fa fa-star"></i>
+                            </div>
                         </div>
 
-                        <p class="ml-2">(4.63)</p>
+                        <p class="ml-2" th:text="'(' + ${#numbers.formatDecimal(product.rating, 0, 2)} + ')'"></p>
                     </div>
 
-                    <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p class="mb-3" th:text="${product.description}"></p>
 
                     <div class="mb-2 d-flex">
-                        <div class="text-danger">$39.99</div>
+                        <div th:unless="${product.promotionalPrice}" th:text="'$' + ${product.price}"></div>
 
-                        <div class="old-price">$59.99</div>
+                        <div class="text-danger" th:if="${product.promotionalPrice}" th:text="'$' + ${product.promotionalPrice}"></div>
+
+                        <div class="old-price" th:if="${product.promotionalPrice}" th:text="'$' + ${product.price}"></div>
                     </div>
 
-                    <div class="section-product__actions">
-                        <button class="btn btn-success">Add to Cart</button>
-                        <button class="btn btn-primary">Add to Favorites</button>
+                    <div class="section-product__actions d-flex">
+                        <form th:action="@{/cart/add/{productId}(productId = ${product.id})}" th:method="POST" class="mr-2">
+                            <button type="submit" class="btn btn-success">Add to Cart</button>
+                        </form>
+
+                        <form th:action="@{/favorite-products/add/{productId}(productId = ${product.id})}" th:method="POST">
+                            <button type="submit" class="btn btn-primary">Add to Favorites</button>
+                        </form>
                     </div>
                 </div>
             </div>
 
             <div class="mt-5">
                 <div class="text-dark">
-                    <form action="" class="row d-flex">
+                    <form th:action="@{/comment/add/{productId}(productId = ${product.id})}" th:method="POST" class="row d-flex">
                       <div class="col-12">
                         <div class="card">
                           <div class="card-body p-4">
@@ -66,11 +75,11 @@
                                 </div>
 
                                 <div class="form-outline">
-                                  <textarea class="form-control w-100" id="textAreaExample" rows="4" cols="30"></textarea>
+                                  <textarea class="form-control w-100" id="description" name="description" rows="4" cols="30"></textarea>
                                 </div>
 
                                 <div class="d-flex justify-content-between mt-3">
-                                  <button type="button" class="btn btn-primary">Send</button>
+                                  <button type="submit" class="btn btn-primary">Send</button>
                                 </div>
                               </div>
                             </div>
@@ -86,127 +95,35 @@
                     <div class="row d-flex justify-content-center">
                       <div class="col-12">
                         <div class="card text-dark">
-                          <div class="card-body p-4">
-                            <h4 class="mb-5">Reviews</h4>
+                            <h4 class="mb-5 p-4">Reviews</h4>
 
-                            <div class="d-flex flex-start">
-                              <div>
-                                <h6 class="fw-bold mb-2">Maggie Marsh</h6>
-                                <div class="card__rating mb-1">
-                                    <div class="rating-group">
-                                        <i class="rating__icon rating__icon--star fa fa-star"></i>
-                                        <i class="rating__icon rating__icon--star fa fa-star"></i>
-                                        <i class="rating__icon rating__icon--star fa fa-star"></i>
-                                        <i class="rating__icon rating__icon--star no-active fa fa-star"></i>
-                                        <i class="rating__icon rating__icon--star no-active fa fa-star"></i>
+                            <div th:each="comment : ${comments}"
+                                 class="card-body p-4">
+                                <div class="d-flex flex-start">
+                                  <div>
+                                    <h6 class="fw-bold mb-2" th:text="${comment.author.username}"></h6>
+                                    <div class="card__rating mb-1">
+                                        <div class="rating-group" th:each="i : ${#numbers.sequence(1, 5)}">
+                                            <div th:if="${comment.rating >= i}">
+                                                <i class="rating__icon rating__icon--star fa fa-star"></i>
+                                            </div>
+
+                                            <div th:unless="${comment.rating >= i}">
+                                                <i class="rating__icon rating__icon--star no-active fa fa-star"></i>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="d-flex align-items-center mb-3">
-                                  <p class="mb-0">
-                                    March 07, 2021
-                                  </p>
-                                </div>
-                                <p class="mb-0">
-                                  Lorem Ipsum is simply dummy text of the printing and typesetting
-                                  industry. Lorem Ipsum has been the industry's standard dummy text ever
-                                  since the 1500s, when an unknown printer took a galley of type and
-                                  scrambled it.
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <hr class="my-0" />
-
-                          <div class="card-body p-4">
-                            <div class="d-flex flex-start">
-                              <div>
-                                <h6 class="fw-bold mb-2">Lara Stewart</h6>
-                                  <div class="card__rating mb-1">
-                                    <div class="rating-group">
-                                        <i class="rating__icon rating__icon--star fa fa-star"></i>
-                                        <i class="rating__icon rating__icon--star fa fa-star"></i>
-                                        <i class="rating__icon rating__icon--star fa fa-star"></i>
-                                        <i class="rating__icon rating__icon--star no-active fa fa-star"></i>
-                                        <i class="rating__icon rating__icon--star no-active fa fa-star"></i>
+                                    <div class="d-flex align-items-center mb-3">
+                                      <p class="mb-0" th:text="${comment.createdOn}">
+                                      </p>
                                     </div>
+                                    <p class="mb-0" th:text="${comment.description}">
+                                    </p>
+                                  </div>
                                 </div>
-                                <div class="d-flex align-items-center mb-3">
-                                  <p class="mb-0">
-                                    March 15, 2021
-                                  </p>
-                                </div>
-                                <p class="mb-0">
-                                  Contrary to popular belief, Lorem Ipsum is not simply random text. It
-                                  has roots in a piece of classical Latin literature from 45 BC, making it
-                                  over 2000 years old. Richard McClintock, a Latin professor at
-                                  Hampden-Sydney College in Virginia, looked up one of the more obscure
-                                  Latin words, consectetur, from a Lorem Ipsum passage, and going through
-                                  the cites.
-                                </p>
-                              </div>
+
+                                <hr class="my-0" style="height: 1px;" />
                             </div>
-                          </div>
-
-                          <hr class="my-0" style="height: 1px;" />
-
-                          <div class="card-body p-4">
-                            <div class="d-flex flex-start">
-                              <div>
-                                <h6 class="fw-bold mb-2">Alexa Bennett</h6>
-                                  <div class="card__rating mb-1">
-                                    <div class="rating-group">
-                                        <i class="rating__icon rating__icon--star fa fa-star"></i>
-                                        <i class="rating__icon rating__icon--star fa fa-star"></i>
-                                        <i class="rating__icon rating__icon--star fa fa-star"></i>
-                                        <i class="rating__icon rating__icon--star no-active fa fa-star"></i>
-                                        <i class="rating__icon rating__icon--star no-active fa fa-star"></i>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center mb-3">
-                                  <p class="mb-0">
-                                    March 24, 2021
-                                  </p>
-                                </div>
-                                <p class="mb-0">
-                                  There are many variations of passages of Lorem Ipsum available, but the
-                                  majority have suffered alteration in some form, by injected humour, or
-                                  randomised words which don't look even slightly believable. If you are
-                                  going to use a passage of Lorem Ipsum, you need to be sure.
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <hr class="my-0" />
-
-                          <div class="card-body p-4">
-                            <div class="d-flex flex-start">
-                              <div>
-                                <h6 class="fw-bold mb-2">Betty Walker</h6>
-                                  <div class="card__rating mb-1">
-                                    <div class="rating-group">
-                                        <i class="rating__icon rating__icon--star fa fa-star"></i>
-                                        <i class="rating__icon rating__icon--star fa fa-star"></i>
-                                        <i class="rating__icon rating__icon--star fa fa-star"></i>
-                                        <i class="rating__icon rating__icon--star no-active fa fa-star"></i>
-                                        <i class="rating__icon rating__icon--star no-active fa fa-star"></i>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center mb-3">
-                                  <p class="mb-0">
-                                    March 30, 2021
-                                  </p>
-                                </div>
-                                <p class="mb-0">
-                                  It uses a dictionary of over 200 Latin words, combined with a handful of
-                                  model sentence structures, to generate Lorem Ipsum which looks
-                                  reasonable. The generated Lorem Ipsum is therefore always free from
-                                  repetition, injected humour, or non-characteristic words etc.
-                                </p>
-                              </div>
-                            </div>
-                          </div>
                         </div>
                       </div>
                     </div>

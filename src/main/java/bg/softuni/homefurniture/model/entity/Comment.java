@@ -6,6 +6,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "comments")
@@ -13,8 +14,11 @@ public class Comment extends BaseEntity {
     @Column(name = "description", nullable = false, columnDefinition = "TEXT")
     private String description;
 
+    @Column(name = "rating", nullable = false)
+    private Double rating;
+
     @Column(name = "created_on", nullable = false)
-    private LocalDate createdOn;
+    private LocalDateTime createdOn;
 
     @ManyToOne
     private User author;
@@ -34,11 +38,19 @@ public class Comment extends BaseEntity {
         this.description = description;
     }
 
-    public LocalDate getCreatedOn() {
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
+    }
+
+    public LocalDateTime getCreatedOn() {
         return createdOn;
     }
 
-    public void setCreatedOn(LocalDate createdOn) {
+    public void setCreatedOn(LocalDateTime createdOn) {
         this.createdOn = createdOn;
     }
 
