@@ -26,8 +26,11 @@ public class Product extends BaseEntity {
     @Column(name = "promotional_price")
     private BigDecimal promotionalPrice;
 
-    @Column(name = "quantity")
+    @Column(name = "quantity", nullable = false)
     private Integer quantity;
+
+    @Column(name = "rating")
+    private Double rating;
 
     @Column(name = "created_on", nullable = false)
     private LocalDate createdOn;
@@ -35,11 +38,12 @@ public class Product extends BaseEntity {
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Category category;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
     private List<Comment> comments;
 
     public Product() {
         this.comments = new ArrayList<>();
+        this.rating = 0.00;
     }
 
     public String getName() {
@@ -88,6 +92,14 @@ public class Product extends BaseEntity {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
     }
 
     public LocalDate getCreatedOn() {
