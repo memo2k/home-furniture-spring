@@ -20,6 +20,12 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "user")
     private Set<Order> orders;
 
+//    @OneToMany(mappedBy = "user")
+//    private Set<Cart> cartProducts;
+//
+//    @OneToMany(mappedBy = "user")
+//    private Set<Favorite> favoriteProducts;
+
     @ManyToMany
     @JoinTable(
       name = "users_roles",
@@ -71,4 +77,20 @@ public class User extends BaseEntity {
     public void setOrders(Set<Order> orders) {
         this.orders = orders;
     }
+
+//    public Set<Cart> getCartProducts() {
+//        return cartProducts;
+//    }
+//
+//    public void setCartProducts(Set<Cart> cartProducts) {
+//        this.cartProducts = cartProducts;
+//    }
+//
+//    public Set<Favorite> getFavoriteProducts() {
+//        return favoriteProducts;
+//    }
+//
+//    public void setFavoriteProducts(Set<Favorite> favoriteProducts) {
+//        this.favoriteProducts = favoriteProducts;
+//    }
 }
