@@ -8,7 +8,7 @@ import java.util.Set;
 @Entity
 @Table(name = "carts")
 public class Cart extends BaseEntity {
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "carts_products",
             joinColumns = @JoinColumn(name = "cart_id"),
