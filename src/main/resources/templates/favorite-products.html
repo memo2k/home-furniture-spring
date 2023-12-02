@@ -12,15 +12,15 @@
             </div>
 
             <div class="my-5">
-              <div class="favorite-product row border-top p-2">
+                <div th:each="product : ${products}" class="favorite-product row border-top p-2">
                     <div class="favorite-product__image col-md-3">
-                        <a href="">
+                        <a th:href="@{/product/{id}(id = ${product.id})}">
                           <img class="w-100 shadow" src="/images/product4.jpg" />
                         </a>
                     </div>
                     <div class="col-md-9">
                       <div class="p-5 mt-4">
-                            <h3>H1 Heading</h3>
+                            <h3 th:text="${product.name}"></h3>
                             <div class="card__rating d-flex align-items-center mb-4">
                                 <div class="rating-group">
                                     <i class="rating__icon rating__icon--star fa fa-star"></i>
@@ -32,60 +32,10 @@
 
                                 <p class="ml-2">(4.63)</p>
                             </div>
-                            <p class="lead mb-5 mt-3">Crow's nest schooner ho scallywag hail-shot gabion salmagundi. Doubloon careen code of conduct lugsail hulk ye long clothes. </p>
-                            <a href="#" class="text-secondary">Remove from favorites</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="favorite-product row border-top p-2">
-                    <div class="favorite-product__image col-md-3">
-                        <a href="">
-                          <img class="w-100 shadow" src="/images/product2.jpg" />
-                        </a>
-                    </div>
-                    <div class="col-md-9">
-                      <div class="p-5 mt-4">
-                            <h3>H1 Heading</h3>
-                             <div class="card__rating d-flex align-items-center mb-4">
-                                <div class="rating-group">
-                                    <i class="rating__icon rating__icon--star fa fa-star"></i>
-                                    <i class="rating__icon rating__icon--star fa fa-star"></i>
-                                    <i class="rating__icon rating__icon--star fa fa-star"></i>
-                                    <i class="rating__icon rating__icon--star no-active fa fa-star"></i>
-                                    <i class="rating__icon rating__icon--star no-active fa fa-star"></i>
-                                </div>
-
-                                 <p class="ml-2">(4.63)</p>
-                            </div>
-                            <p class="lead mb-5 mt-3">Crow's nest schooner ho scallywag hail-shot gabion salmagundi. Doubloon careen code of conduct lugsail hulk ye long clothes. </p>
-                            <a href="#" class="text-secondary">Remove from favorites</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="favorite-product row border-top p-2">
-                    <div class="favorite-product__image col-md-3">
-                        <a href="">
-                          <img class="w-100 shadow" src="/images/product4.jpg" />
-                        </a>
-                    </div>
-                    <div class="col-md-9">
-                      <div class="p-5 mt-4">
-                            <h3>H1 Heading</h3>
-                            <div class="card__rating d-flex align-items-center mb-4">
-                                <div class="rating-group">
-                                    <i class="rating__icon rating__icon--star fa fa-star"></i>
-                                    <i class="rating__icon rating__icon--star fa fa-star"></i>
-                                    <i class="rating__icon rating__icon--star fa fa-star"></i>
-                                    <i class="rating__icon rating__icon--star no-active fa fa-star"></i>
-                                    <i class="rating__icon rating__icon--star no-active fa fa-star"></i>
-                                </div>
-
-                                <p class="ml-2">(4.63)</p>
-                            </div>
-                            <p class="lead mb-5 mt-3">Crow's nest schooner ho scallywag hail-shot gabion salmagundi. Doubloon careen code of conduct lugsail hulk ye long clothes. </p>
-                            <a href="#" class="text-secondary">Remove from favorites</a>
+                            <p class="lead mb-5 mt-3" th:text="${product.description}"></p>
+                          <form th:action="@{/favorite-products/remove/{productId}(productId = ${product.id})}" th:method="POST">
+                            <input class="text-secondary btn" type="submit" value="Remove from favorites" />
+                          </form>
                         </div>
                     </div>
                 </div>
