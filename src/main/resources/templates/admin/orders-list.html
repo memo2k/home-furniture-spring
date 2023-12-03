@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/admin-nav::head}"></head>
+<body>
+<header th:replace="~{fragments/admin-nav::header}"></header>
+<main>
+    <div class="section-products-list mt-5">
+        <div class="shell">
+            <div class="mb-5">
+                <h1>Manage Orders</h1>
+            </div>
+
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Total Price</th>
+                  <th scope="col">Client's First Name</th>
+                  <th scope="col">Client's Last Name</th>
+                  <th scope="col">Client's Phone Number</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:if="${orders.size() > 0}" th:each="order: ${orders}" class="align-content-center">
+                  <td class="align-middle" th:text="${order.id}"></td>
+                  <td class="align-middle" th:text="${#numbers.formatDecimal(order.totalPrice, 1, 2)}"></td>
+                  <td class="align-middle" th:text="${order.firstName}"></td>
+                  <td class="align-middle" th:text="${order.lastName}"></td>
+                  <td class="align-middle" th:text="${order.phoneNumber}"></td>
+                  <td class="align-middle" th:text="${order.orderStatus}"></td>
+                  <td class="align-middle">
+                    <a th:href="@{/admin/order-details/{orderId}(orderId = ${order.id})}" class="btn btn-outline-primary">Details</a>
+                    <button class="btn btn-outline-danger"><i class="fa-regular fa-trash-can"></i></button>
+                  </td>
+                </tr>
+                <tr th:unless="${orders.size() > 0}">
+                    <td class="align-middle text-center" colspan="5">No orders yet.</td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+<footer th:replace="~{fragments/commons::footer}"></footer>
+</body>
+</html>

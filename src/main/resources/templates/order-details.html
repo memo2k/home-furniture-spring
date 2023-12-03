@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/commons::head}"></head>
+<body>
+<header th:replace="~{fragments/commons::header}"></header>
+<main>
+    <div class="section-order-details mt-5">
+        <div class="shell">
+            <section class="d-lg-flex">
+                <div class="col-lg-4">
+                    <p class="font-weight-bold order-details__head">Client details:</p>
+                    <p><i class="fa-solid fa-user"></i> <span th:text="'Full name: ' + ${order.firstName} + ' ' + ${order.lastName}"></span></p>
+                    <p><i class="fa-solid fa-envelope"></i> <span th:text="'Email: ' + ${order.user.email}"></span></p>
+                    <p><i class="fa-solid fa-phone"></i> <span th:text="'Phone number: ' + ${order.phoneNumber}"></span></p>
+                </div>
+
+                <div class="col-lg-4">
+                    <p class="font-weight-bold order-details__head">Delivery details:</p>
+                    <p><i class="fa-solid fa-map-location-dot"></i> <span th:text="'Address: ' + ${order.address}"></span></p>
+                    <p><i class="fa-solid fa-money-bill"></i> <span th:text="'Payment type: ' + ${order.paymentType}"></span></p>
+                </div>
+
+                <div class="col-lg-4">
+                    <p class="font-weight-bold order-details__head">Order details:</p>
+                    <p><i class="fa-solid fa-calendar"></i> <span th:text="'Order made on: ' + ${#temporals.format(order.createdOn, 'SHORT')}"></span></p>
+                    <p><i class="fa-solid fa-money-bill"></i> <span th:text="'Total price: $' + ${#numbers.formatDecimal(order.totalPrice, 1, 2)}"></span></p>
+                    <p><i class="fa-solid fa-truck-ramp-box"></i> <span th:text="'Status: ' + ${order.orderStatus}"></span></p>
+                </div>
+
+<!--                <div class="col-lg-4">-->
+<!--                    <p class="font-weight-bold">Status:</p>-->
+<!--                </div>-->
+            </section>
+
+            <section class="mt-5">
+                <h3 class="mb-4">Products</h3>
+
+                <table class="table">
+                  <thead>
+                    <tr>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr th:if="${order.products.size() > 0}" th:each="product: ${order.products}" class="align-content-center">
+                      <td class="align-middle" th:text="${product.id}"></td>
+                      <th scope="row" class="section-cart__image">
+                          <a th:href="@{/product/{id}(id = ${product.id})}">
+                              <img class="w-100 shadow" src="/images/product4.jpg" />
+                          </a>
+                      </th>
+                      <td class="align-middle" th:text="${product.name}"></td>
+                      <td class="align-middle">
+                          <div class="mb-2 d-flex">
+                              <div th:unless="${product.promotionalPrice}"
+                                   th:text="'$' + ${#numbers.formatDecimal(product.price, 1, 2)}"></div>
+
+                              <div class="text-danger" th:if="${product.promotionalPrice}"
+                                   th:text="'$' + ${#numbers.formatDecimal(product.promotionalPrice, 1, 2)}"></div>
+
+                              <div class="old-price" th:if="${product.promotionalPrice}"
+                                   th:text="'$' + ${#numbers.formatDecimal(product.price, 1, 2)}"></div>
+                          </div>
+                      </td>
+                    </tr>
+                    <tr th:unless="${order.products.size() > 0}">
+                        <td class="align-middle text-center" colspan="7">No products yet.</td>
+                    </tr>
+                  </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+</main>
+<footer th:replace="~{fragments/commons::footer}"></footer>
+</body>
+</html>

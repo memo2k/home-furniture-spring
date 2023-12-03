@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/admin-nav::head}"></head>
+<body>
+<header th:replace="~{fragments/admin-nav::header}"></header>
+<main>
+    <div class="section-products-list mt-5">
+        <div class="shell">
+            <div class="mb-5">
+                <h1>Manage Users</h1>
+            </div>
+
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Username</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Orders</th>
+                  <th scope="col">Role</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="user: ${users}" class="align-content-center">
+                  <td class="align-middle" th:text="${user.id}"></td>
+                  <td class="align-middle" th:text="${user.username}"></td>
+                  <td class="align-middle" th:text="${user.email}"></td>
+                  <td class="align-middle" th:text="${user.orders.size()}"></td>
+                  <td class="align-middle">Yes</td>
+                  <td class="align-middle">
+                    <button class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+<footer th:replace="~{fragments/commons::footer}"></footer>
+</body>
+</html>
