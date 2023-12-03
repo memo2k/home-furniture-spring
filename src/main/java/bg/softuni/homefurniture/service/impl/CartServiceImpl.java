@@ -41,13 +41,37 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public void addProductToCart(Cart cart, Product product) {
-        cart.getProducts().add(product);
-        cartRepository.save(cart);
+        if(!isProductInCart(cart, product)) {
+            cart.getProducts().add(product);
+
+            double price = product.getPromotionalPrice() != null
+                    ? product.getPromotionalPrice()
+                    : product.getPrice();
+
+            cart.setTotalPrice(cart.getTotalPrice() + price);
+            cartRepository.save(cart);
+        } else {
+
+        }
     }
 
     @Override
     public void removeProductFromCart(Cart cart, Product product) {
+        double price = product.getPromotionalPrice() != null
+                    ? product.getPromotionalPrice()
+                    : product.getPrice();
+
+        cart.setTotalPrice(cart.getTotalPrice() - price);
         cart.getProducts().removeIf(p -> p.getId().equals(product.getId()));
         cartRepository.save(cart);
+    }
+
+    public boolean isProductInCart(Cart cart, Product product) {
+        for (Product cartProduct : cart.getProducts()) {
+            if (cartProduct.getId().equals(product.getId())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

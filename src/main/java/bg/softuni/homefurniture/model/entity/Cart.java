@@ -2,12 +2,16 @@ package bg.softuni.homefurniture.model.entity;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "carts")
 public class Cart extends BaseEntity {
+    @Column(name = "total_price")
+    private Double totalPrice;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "carts_products",
@@ -16,11 +20,20 @@ public class Cart extends BaseEntity {
     )
     private Set<Product> products;
 
-    @ManyToOne
+    @OneToOne
     private User user;
 
     public Cart() {
         this.products = new HashSet<>();
+        this.totalPrice = 0.00;
+    }
+
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public Set<Product> getProducts() {

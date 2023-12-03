@@ -34,9 +34,12 @@ public class CartController {
         User user = userService.getAuth();
         Cart cart = cartService.getUserCart(user.getId());
 
-        Set<Product> products = cart.getProducts();
+        if (cart != null) {
+            Set<Product> products = cart.getProducts();
+            modelAndView.addObject("products", products);
+            modelAndView.addObject("cart", cart);
+        }
 
-        modelAndView.addObject("products", products);
         return modelAndView;
     }
 
