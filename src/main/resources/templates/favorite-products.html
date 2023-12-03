@@ -11,34 +11,46 @@
                 <h1>Favorite Products</h1>
             </div>
 
-            <div class="my-5">
-                <div th:each="product : ${products}" class="favorite-product row border-top p-2">
-                    <div class="favorite-product__image col-md-3">
-                        <a th:href="@{/product/{id}(id = ${product.id})}">
-                          <img class="w-100 shadow" src="/images/product4.jpg" />
-                        </a>
-                    </div>
-                    <div class="col-md-9">
-                      <div class="p-5 mt-4">
-                            <h3 th:text="${product.name}"></h3>
-                            <div class="card__rating d-flex align-items-center mb-4">
-                                <div class="rating-group">
-                                    <i class="rating__icon rating__icon--star fa fa-star"></i>
-                                    <i class="rating__icon rating__icon--star fa fa-star"></i>
-                                    <i class="rating__icon rating__icon--star fa fa-star"></i>
-                                    <i class="rating__icon rating__icon--star no-active fa fa-star"></i>
-                                    <i class="rating__icon rating__icon--star no-active fa fa-star"></i>
-                                </div>
+            <div th:if="${products != null}" class="my-5">
+                <div th:if="${products.size() > 0}">
+                    <div th:each="product : ${products}" class="favorite-product row border-top p-2">
+                        <div class="favorite-product__image col-md-3">
+                            <a th:href="@{/product/{id}(id = ${product.id})}">
+                              <img class="w-100 shadow" src="/images/product4.jpg" />
+                            </a>
+                        </div>
+                        <div class="col-md-9">
+                          <div class="p-5 mt-4">
+                                <h3 th:text="${product.name}"></h3>
+                                <div class="card__rating d-flex align-items-center mb-4">
+                                    <div class="rating-group" th:each="i : ${#numbers.sequence(1, 5)}">
+                                        <div th:if="${product.rating >= i}">
+                                            <i class="rating__icon rating__icon--star fa fa-star"></i>
+                                        </div>
 
-                                <p class="ml-2">(4.63)</p>
+                                        <div th:unless="${product.rating >= i}">
+                                            <i class="rating__icon rating__icon--star no-active fa fa-star"></i>
+                                        </div>
+                                    </div>
+
+                                    <p class="ml-2" th:text="'(' + ${#numbers.formatDecimal(product.rating, 1, 2)} + ')'"></p>
+                                </div>
+                                <p class="lead mb-5 mt-3" th:text="${product.description}"></p>
+                              <form th:action="@{/favorite-products/remove/{productId}(productId = ${product.id})}" th:method="POST">
+                                <input class="text-secondary btn" type="submit" value="Remove from favorites" />
+                              </form>
                             </div>
-                            <p class="lead mb-5 mt-3" th:text="${product.description}"></p>
-                          <form th:action="@{/favorite-products/remove/{productId}(productId = ${product.id})}" th:method="POST">
-                            <input class="text-secondary btn" type="submit" value="Remove from favorites" />
-                          </form>
                         </div>
                     </div>
                 </div>
+
+                <div th:unless="${products.size() > 0}">
+                    <div>You don't have any products in your favorites.</div>
+                </div>
+            </div>
+
+            <div class="my-5" th:unless="${products != null}">
+                <div>You don't have any products in your favorites.</div>
             </div>
         </div>
     </section>

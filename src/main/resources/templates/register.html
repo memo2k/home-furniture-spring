@@ -7,7 +7,7 @@
 <main>
     <section class="section-auth">
         <div class="shell">
-            <form th:method="POST" th:action="@{/users/register}" class='pad-bg form-auth'>
+            <form th:method="POST" th:action="@{/user/register}" class='pad-bg form-auth'>
                 <h1 class="text-center">Register</h1>
                 <div class="form-group">
                   <label for="username">Username</label>
@@ -31,7 +31,7 @@
 
                 <button type="submit" class="btn btn-primary my-4">Register</button>
 
-                <p class="text-secondary">Already have an account? <a th:href="@{/users/login}">Login</a></p>
+                <p class="text-secondary">Already have an account? <a th:href="@{/user/login}">Login</a></p>
             </form>
         </div>
     </section>

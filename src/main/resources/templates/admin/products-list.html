@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/commons::head}"></head>
+<head th:replace="~{fragments/admin-nav::head}"></head>
 <body>
-<header th:replace="~{fragments/commons::header}"></header>
+<header th:replace="~{fragments/admin-nav::header}"></header>
 <main>
     <div class="section-products-list mt-5">
         <div class="shell">
@@ -26,7 +26,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr th:each="product: ${products}" class="align-content-center">
+                <tr th:if="${products.size() > 0}" th:each="product: ${products}" class="align-content-center">
                   <td class="align-middle" th:text="${product.id}"></td>
                   <th scope="row" class="section-cart__image">
                       <a th:href="@{/product/{id}(id = ${product.id})}">
@@ -36,19 +36,24 @@
                   <td class="align-middle" th:text="${product.name}"></td>
                   <td class="align-middle">
                       <div class="mb-2 d-flex">
-                          <div th:unless="${product.promotionalPrice}" th:text="'$' + ${product.price}"></div>
+                          <div th:unless="${product.promotionalPrice}"
+                               th:text="'$' + ${#numbers.formatDecimal(product.price, 1, 2)}"></div>
 
-                          <div class="text-danger" th:if="${product.promotionalPrice}" th:text="'$' + ${product.promotionalPrice}"></div>
+                          <div class="text-danger" th:if="${product.promotionalPrice}"
+                               th:text="'$' + ${#numbers.formatDecimal(product.promotionalPrice, 1, 2)}"></div>
 
-                          <div class="old-price" th:if="${product.promotionalPrice}" th:text="'$' + ${product.price}"></div>
+                          <div class="old-price" th:if="${product.promotionalPrice}"
+                               th:text="'$' + ${#numbers.formatDecimal(product.price, 1, 2)}"></div>
                       </div>
                   </td>
                   <td class="align-middle" th:text="${product.quantity}"></td>
                   <td class="align-middle">Yes</td>
                   <td class="align-middle">
                     <button class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i></button>
-                    <button class="btn btn-outline-danger"><i class="fa-regular fa-trash-can"></i></button>
                   </td>
+                </tr>
+                <tr th:unless="${products.size() > 0}">
+                    <td class="align-middle text-center" colspan="7">No products yet.</td>
                 </tr>
               </tbody>
             </table>

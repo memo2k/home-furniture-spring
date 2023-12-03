@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/commons::head}"></head>
+<head th:replace="~{fragments/admin-nav::head}"></head>
 <body>
-<header th:replace="~{fragments/commons::header}"></header>
+<header th:replace="~{fragments/admin-nav::header}"></header>
 <main>
     <div style="margin: 100px auto">
         <form class="form-product" th:action="@{/admin/add-product}" th:method="POST">

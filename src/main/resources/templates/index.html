@@ -13,198 +13,45 @@
           </ol>
           <div class="carousel-inner">
             <div class="carousel-item active">
-                <a href="#">
-                  <img class="d-block w-100" src="/images/slider_1.png" alt="First slide">
-                </a>
+              <img class="d-block w-100" src="/images/slider_1.png" alt="First slide">
             </div>
             <div class="carousel-item">
-                <a href="#">
-                  <img class="d-block w-100" src="/images/slider_2.png" alt="Second slide">
-                </a>
+              <img class="d-block w-100" src="/images/slider_2.png" alt="Second slide">
             </div>
           </div>
         </div>
     </section>
 
-    <section class="section-top-products">
+    <section th:if="${products != null and products.size() > 0}" class="section-top-products">
         <div class="shell shell--small">
             <div class="section__title text-center">
-                <h1>Top Products</h1>
+                <h1>New Products</h1>
             </div>
 
             <div class="section__cards">
                 <div class="grid grid-no-gutter">
-                    <div class="grid__col grid__col--1of4">
+                    <div th:each="product : ${products}" class="grid__col grid__col--1of4">
                         <div class="card">
                             <div class="card__image">
-                                <a href="#">
+                                <a th:href="@{/product/{productId}(productId = ${product.id})}">
                                     <img src="/images/product3.jpg" alt="">
                                 </a>
                             </div>
 
                             <div class="card__body">
-                                <a href="#">
-                                    <h3 class="card__title">Product 1</h3>
+                                <a th:href="@{/product/{productId}(productId = ${product.id})}">
+                                    <h3 class="card__title" th:text="${product.name}"></h3>
                                 </a>
 
                                 <div class="card__price">
-                                    <div class="card__current-price text-danger">$39.99</div>
+                                    <div class="card__current-price" th:unless="${product.promotionalPrice}"
+                                         th:text="'$' + ${#numbers.formatDecimal(product.price, 1, 2)}"></div>
 
-                                    <div class="old-price">$59.99</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                    <div class="card__current-price text-danger" th:if="${product.promotionalPrice}"
+                                         th:text="'$' + ${#numbers.formatDecimal(product.promotionalPrice, 1, 2)}"></div>
 
-                    <div class="grid__col grid__col--1of4">
-                        <div class="card">
-                            <div class="card__image">
-                                <a href="#">
-                                    <img src="/images/product2.jpg" alt="">
-                                </a>
-                            </div>
-
-                            <div class="card__body">
-                                <a href="#">
-                                    <h3 class="card__title">Product 1</h3>
-                                </a>
-
-                                <div class="card__price">
-                                    <div class="card__current-price text-danger">$39.99</div>
-
-                                    <div class="old-price">$59.99</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="grid__col grid__col--1of4">
-                        <div class="card">
-                            <div class="card__image">
-                                <a href="#">
-                                    <img src="/images/product2.jpg" alt="">
-                                </a>
-                            </div>
-
-                            <div class="card__body">
-                                <a href="#">
-                                    <h3 class="card__title">Product 1</h3>
-                                </a>
-
-                                <div class="card__price">
-                                    <div class="card__current-price text-danger">$39.99</div>
-
-                                    <div class="old-price">$59.99</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="grid__col grid__col--1of4">
-                        <div class="card">
-                            <div class="card__image">
-                                <a href="#">
-                                    <img src="/images/product3.jpg" alt="">
-                                </a>
-                            </div>
-
-                            <div class="card__body">
-                                <a href="#">
-                                    <h3 class="card__title">Product 1</h3>
-                                </a>
-
-                                <div class="card__price">
-                                    <div class="card__current-price text-danger">$39.99</div>
-
-                                    <div class="old-price">$59.99</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="grid__col grid__col--1of4">
-                        <div class="card">
-                            <div class="card__image">
-                                <a href="#">
-                                    <img src="/images/product2.jpg" alt="">
-                                </a>
-                            </div>
-
-                            <div class="card__body">
-                                <a href="#">
-                                    <h3 class="card__title">Product 1</h3>
-                                </a>
-
-                                <div class="card__price">
-                                    <div class="card__current-price text-danger">$39.99</div>
-
-                                    <div class="old-price">$59.99</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="grid__col grid__col--1of4">
-                        <div class="card">
-                            <div class="card__image">
-                                <a href="#">
-                                    <img src="/images/product2.jpg" alt="">
-                                </a>
-                            </div>
-
-                            <div class="card__body">
-                                <a href="#">
-                                    <h3 class="card__title">Product 1</h3>
-                                </a>
-
-                                <div class="card__price">
-                                    <div class="card__current-price text-danger">$39.99</div>
-
-                                    <div class="old-price">$59.99</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="grid__col grid__col--1of4">
-                        <div class="card">
-                            <div class="card__image">
-                                <a href="#">
-                                    <img src="/images/product2.jpg" alt="">
-                                </a>
-                            </div>
-
-                            <div class="card__body">
-                                <a href="#">
-                                    <h3 class="card__title">Product 1</h3>
-                                </a>
-
-                                <div class="card__price">
-                                    <div class="card__current-price text-danger">$39.99</div>
-
-                                    <div class="old-price">$59.99</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="grid__col grid__col--1of4">
-                        <div class="card">
-                            <div class="card__image">
-                                <a href="#">
-                                    <img src="/images/product2.jpg" alt="">
-                                </a>
-                            </div>
-
-                            <div class="card__body">
-                                <a href="#">
-                                    <h3 class="card__title">Product 1</h3>
-                                </a>
-
-                                <div class="card__price">
-                                    <div class="card__current-price text-danger">$39.99</div>
-
-                                    <div class="old-price">$59.99</div>
+                                    <div class="old-price" th:if="${product.promotionalPrice}"
+                                         th:text="'$' + ${#numbers.formatDecimal(product.price, 1, 2)}"></div>
                                 </div>
                             </div>
                         </div>
@@ -214,92 +61,38 @@
         </div>
     </section>
 
-    <section class="section-testimonials">
+    <section th:if="${comments != null and comments.size() > 0}" class="section-testimonials">
         <div class="shell">
             <div class="section__title text-center">
                 <h1>Testimonials</h1>
             </div>
 
             <div class="d-lg-flex flex-lg-row">
-                <div class="col-12 col-lg-4 flex-lg-column">
+                <div th:each="comment : ${comments}" class="col-12 col-lg-4 flex-lg-column">
                     <div class="card">
                         <div class="card__body text-center">
                             <div class="card__text">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                <p th:text="${comment.description}"></p>
                             </div>
 
                             <div class="card__rating">
-                                <div class="rating-group">
-                                    <i class="rating__icon rating__icon--star fa fa-star"></i>
-                                    <i class="rating__icon rating__icon--star fa fa-star"></i>
-                                    <i class="rating__icon rating__icon--star fa fa-star"></i>
-                                    <i class="rating__icon rating__icon--star no-active fa fa-star"></i>
-                                    <i class="rating__icon rating__icon--star no-active fa fa-star"></i>
+                                <div class="rating-group" th:each="i : ${#numbers.sequence(1, 5)}">
+                                    <div th:if="${comment.rating >= i}">
+                                        <i class="rating__icon rating__icon--star fa fa-star"></i>
+                                    </div>
+
+                                    <div th:unless="${comment.rating >= i}">
+                                        <i class="rating__icon rating__icon--star no-active fa fa-star"></i>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="card__profile-name">
-                                <p>Joe Johns</p>
+                                <p th:text="${comment.author}"></p>
                             </div>
 
                             <div class="card__posted-on">
-                                <span>Posted on 10/12/2023</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-4 flex-lg-column">
-                    <div class="card">
-                        <div class="card__body text-center">
-                            <div class="card__text">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                            </div>
-
-                            <div class="card__rating">
-                                <div class="rating-group">
-                                    <i class="rating__icon rating__icon--star fa fa-star"></i>
-                                    <i class="rating__icon rating__icon--star fa fa-star"></i>
-                                    <i class="rating__icon rating__icon--star fa fa-star"></i>
-                                    <i class="rating__icon rating__icon--star no-active fa fa-star"></i>
-                                    <i class="rating__icon rating__icon--star no-active fa fa-star"></i>
-                                </div>
-                            </div>
-
-                            <div class="card__profile-name">
-                                <p>Joe Johns</p>
-                            </div>
-
-                            <div class="card__posted-on">
-                                <span>Posted on 10/12/2023</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-4 flex-lg-column">
-                    <div class="card">
-                        <div class="card__body text-center">
-                            <div class="card__text">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                            </div>
-
-                            <div class="card__rating">
-                                <div class="rating-group">
-                                    <i class="rating__icon rating__icon--star fa fa-star"></i>
-                                    <i class="rating__icon rating__icon--star fa fa-star"></i>
-                                    <i class="rating__icon rating__icon--star fa fa-star"></i>
-                                    <i class="rating__icon rating__icon--star no-active fa fa-star"></i>
-                                    <i class="rating__icon rating__icon--star no-active fa fa-star"></i>
-                                </div>
-                            </div>
-
-                            <div class="card__profile-name">
-                                <p>Joe Johns</p>
-                            </div>
-
-                            <div class="card__posted-on">
-                                <span>Posted on 10/12/2023</span>
+                                <span th:text="'Posted on ' + ${#temporals.format(comment.createdOn, 'dd/MM/yyyy')}"></span>
                             </div>
                         </div>
                     </div>

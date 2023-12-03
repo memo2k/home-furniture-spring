@@ -40,13 +40,13 @@
 
                                 <div class="card__price">
                                     <div class="card__current-price" th:unless="${product.promotionalPrice}"
-                                         th:text="'$' + ${product.price}"></div>
+                                         th:text="'$' + ${#numbers.formatDecimal(product.price, 1, 2)}"></div>
 
                                     <div class="card__current-price text-danger" th:if="${product.promotionalPrice}"
-                                         th:text="'$' + ${product.promotionalPrice}"></div>
+                                         th:text="'$' + ${#numbers.formatDecimal(product.promotionalPrice, 1, 2)}"></div>
 
                                     <div class="old-price" th:if="${product.promotionalPrice}"
-                                         th:text="'$' + ${product.price}"></div>
+                                         th:text="'$' + ${#numbers.formatDecimal(product.price, 1, 2)}"></div>
                                 </div>
                             </div>
                         </div>

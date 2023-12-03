@@ -11,34 +11,58 @@
                 <h1>Your Cart</h1>
             </div>
 
-            <table class="table">
-              <tbody>
-                <tr th:each="product : ${products}" class="align-content-center">
-                  <th scope="row" class="section-cart__image">
-                      <a th:href="@{/product/{id}(id = ${product.id})}">
-                          <img class="w-100 shadow" src="/images/product4.jpg" />
-                      </a>
-                  </th>
-                  <td class="align-middle" style="max-width: 70%" th:text="${product.name}"></td>
-                  <td class="align-middle">
-                      <div class="d-flex">
-                          <div th:unless="${product.promotionalPrice}" th:text="'$' + ${product.price}"></div>
+            <div th:if="${products != null}">
+                <div th:if="${products.size() > 0}">
+                    <table class="table">
+                      <tbody>
+                        <tr th:each="product : ${products}" class="align-content-center">
+                          <th scope="row" class="section-cart__image">
+                              <a th:href="@{/product/{id}(id = ${product.id})}">
+                                  <img class="w-100 shadow" src="/images/product4.jpg" />
+                              </a>
+                          </th>
+                          <td class="align-middle" style="max-width: 70%" th:text="${product.name}"></td>
+                          <td class="align-middle">
+                              <div class="d-flex">
+                                  <div th:unless="${product.promotionalPrice}"
+                                       th:text="'$' + ${#numbers.formatDecimal(product.price, 1, 2)}"></div>
 
-                          <div class="text-danger" th:if="${product.promotionalPrice}" th:text="'$' + ${product.promotionalPrice}"></div>
+                                  <div class="text-danger" th:if="${product.promotionalPrice}"
+                                       th:text="'$' + ${#numbers.formatDecimal(product.promotionalPrice, 1, 2)}"></div>
 
-                          <div class="old-price" th:if="${product.promotionalPrice}" th:text="'$' + ${product.price}"></div>
-                      </div>
-                  </td>
-<!--                  <td class="align-middle">x2</td>-->
-<!--                  <td class="align-middle">$400.00</td>-->
-                  <td class="align-middle">
-                      <form th:action="@{/cart/remove/{productId}(productId = ${product.id})}" th:method="POST">
-                        <button class="btn btn-outline-danger" type="submit"><i class="fa-solid fa-x"></i></button>
-                      </form>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                                  <div class="old-price" th:if="${product.promotionalPrice}"
+                                       th:text="'$' + ${#numbers.formatDecimal(product.price, 1, 2)}"></div>
+                              </div>
+                          </td>
+        <!--                  <td class="align-middle">x2</td>-->
+        <!--                  <td class="align-middle">$400.00</td>-->
+                          <td class="align-middle">
+                              <form th:action="@{/cart/remove/{productId}(productId = ${product.id})}" th:method="POST">
+                                <button class="btn btn-outline-danger" type="submit"><i class="fa-solid fa-x"></i></button>
+                              </form>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <div class="my-3" th:text="'Total: $' + ${#numbers.formatDecimal(cart.totalPrice, 1, 2)}"></div>
+
+                    <a th:href="@{/checkout}" class="btn btn-success text-white">Continue to Checkout</a>
+                    <a th:href="@{/all-products}" class="btn btn-primary">Continue Shopping</a>
+                </div>
+
+                <div th:unless="${products.size() > 0}">
+                    <div>Your cart is empty.</div>
+
+                    <a th:href="@{/all-products}" class="btn btn-primary mt-5">Continue Shopping</a>
+                </div>
+            </div>
+
+            <div th:unless="${products != null}">
+                <div>Your cart is empty.</div>
+
+                <a th:href="@{/all-products}" class="btn btn-primary mt-5">Continue Shopping</a>
+            </div>
         </div>
     </section>
 </main>
