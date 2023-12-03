@@ -58,4 +58,9 @@ public class CommentServiceImpl implements CommentService {
                 .sorted(Comparator.comparing(Comment::getCreatedOn).reversed())
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<Comment> findTopComments() {
+        return commentRepository.findTop3ByOrderByRatingDesc();
+    }
 }

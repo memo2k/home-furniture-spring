@@ -11,4 +11,6 @@ public interface CommentService {
     void addCommentToProduct(User user, Product product, AddCommentBindingModel addCommentBindingModel);
 
     List<Comment> orderCommentsByDateDesc(List<Comment> comments);
+
+    List<Comment> findTopComments();
 }
