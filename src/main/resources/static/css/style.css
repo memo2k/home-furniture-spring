@@ -497,3 +497,15 @@ color: red;
     width: auto;
     object-fit: cover;
 }
+
+/* Section Checkout */
+.section-checkout a img {
+    width: 60px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Section Order Details */
+.section-order-details .order-details__head {
+    color: var(--red);
+}
