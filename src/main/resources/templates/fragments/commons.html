@@ -69,32 +69,38 @@
                         <li><a href="#">Office</a></li>
 
                         <li><a href="#">Decoration</a></li>
+
+                        <li><a th:href="@{/all-products}">See All</a></li>
                     </ul>
                 </nav>
 
                 <div class="header__profile">
                     <ul th:if="${@loggedUser.isLogged}">
                         <li>
-                            <a th:href="@{/cart/list}"><i class="fa-solid fa-cart-shopping"></i> Cart</a>
+                            <a th:href="@{/admin/products-list}"><i class="fa-solid fa-user-tie"></i> Admin</a>
                         </li>
-                        
+
                         <li>
-                            <a th:href="@{/favorite-products/list}"><i class="fa-solid fa-heart"></i> Favorites</a>
+                            <a th:href="@{/user/profile}"><i class="fa-solid fa-user"></i> Profile</a>
+                        </li>
+
+                        <li>
+                            <a th:href="@{/cart/list}"><i class="fa-solid fa-basket-shopping"></i> Cart</a>
                         </li>
 
                         <li>
                             <a href="javascript:logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
 
-                            <form th:action="@{/users/logout}" th:method="POST" class="d-none" id="logout_form">
+                            <form th:action="@{/user/logout}" th:method="POST" class="d-none" id="logout_form">
                                 <input type="submit" value="Logout">
                             </form>
                         </li>
                     </ul>
 
                     <ul th:unless="${@loggedUser.isLogged}">
-                        <li><a th:href="@{/users/login}"><i class="fa-solid fa-right-to-bracket"></i> Login</a></li>
+                        <li><a th:href="@{/user/login}"><i class="fa-solid fa-right-to-bracket"></i> Login</a></li>
 
-                        <li><a th:href="@{/users/register}"><i class="fa-solid fa-user-plus"></i> Register</a></li>
+                        <li><a th:href="@{/user/register}"><i class="fa-solid fa-user-plus"></i> Register</a></li>
                     </ul>
                 </div>
             </div>
