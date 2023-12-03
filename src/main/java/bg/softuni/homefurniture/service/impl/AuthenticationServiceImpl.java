@@ -2,6 +2,7 @@ package bg.softuni.homefurniture.service.impl;
 
 import bg.softuni.homefurniture.model.dto.binding.UserLoginBindingModel;
 import bg.softuni.homefurniture.model.dto.binding.UserRegisterBindingModel;
+import bg.softuni.homefurniture.model.entity.Cart;
 import bg.softuni.homefurniture.model.entity.User;
 import bg.softuni.homefurniture.repository.UserRepository;
 import bg.softuni.homefurniture.service.AuthenticationService;
@@ -10,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -30,6 +32,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public void register(UserRegisterBindingModel userRegisterBindingModel) {
         User user = modelMapper.map(userRegisterBindingModel, User.class);
         user.setPassword(passwordEncoder.encode(userRegisterBindingModel.getPassword()));
+        user.setCreatedOn(LocalDateTime.now());
 
         this.userRepository.save(user);
     }
