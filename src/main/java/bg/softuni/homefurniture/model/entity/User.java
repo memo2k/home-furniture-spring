@@ -2,6 +2,7 @@ package bg.softuni.homefurniture.model.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,11 +18,14 @@ public class User extends BaseEntity {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "user")
+    @Column(name = "created_on")
+    private LocalDateTime createdOn;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Order> orders;
 
-//    @OneToMany(mappedBy = "user")
-//    private Set<Cart> cartProducts;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST)
+    private Cart cart;
 //
 //    @OneToMany(mappedBy = "user")
 //    private Set<Favorite> favoriteProducts;
@@ -62,6 +66,14 @@ public class User extends BaseEntity {
         this.password = password;
     }
 
+    public LocalDateTime getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(LocalDateTime createdOn) {
+        this.createdOn = createdOn;
+    }
+
     public Set<Role> getRoles() {
         return roles;
     }
@@ -78,14 +90,15 @@ public class User extends BaseEntity {
         this.orders = orders;
     }
 
-//    public Set<Cart> getCartProducts() {
-//        return cartProducts;
-//    }
-//
-//    public void setCartProducts(Set<Cart> cartProducts) {
-//        this.cartProducts = cartProducts;
-//    }
-//
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
+    //
 //    public Set<Favorite> getFavoriteProducts() {
 //        return favoriteProducts;
 //    }

@@ -4,7 +4,10 @@ import bg.softuni.homefurniture.model.entity.User;
 import bg.softuni.homefurniture.repository.UserRepository;
 import bg.softuni.homefurniture.service.UserService;
 import bg.softuni.homefurniture.service.session.LoggedUser;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -19,5 +22,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getAuth() {
         return userRepository.findByEmail(loggedUser.getEmail());
+    }
+
+    @Override
+    public List<User> getAll() {
+        return userRepository.findAll(Sort.by(Sort.Direction.DESC, "createdOn"));
     }
 }
