@@ -39,9 +39,10 @@ public class FavoriteController {
         User user = authenticationService.getUserById(loggedUser.getId());
         Favorite favorite = favoriteService.getUserFavoritesList(user.getId());
 
-        Set<Product> products = favorite.getProducts();
-
-        modelAndView.addObject("products", products);
+        if (favorite != null) {
+            Set<Product> products = favorite.getProducts();
+            modelAndView.addObject("products", products);
+        }
         return modelAndView;
     }
 
