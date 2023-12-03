@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +27,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void addProduct(AddProductBindingModel addProductBindingModel) {
         Product product = modelMapper.map(addProductBindingModel, Product.class);
-        product.setCreatedOn(LocalDate.now());
+        product.setCreatedOn(LocalDateTime.now());
 
         productRepository.save(product);
     }
@@ -50,5 +51,10 @@ public class ProductServiceImpl implements ProductService {
 //                .orElseThrow(() -> new ProductNotFoundException("Product not found."));
 
         return modelMapper.map(product, Product.class);
+    }
+
+    @Override
+    public List<Product> findNewProducts() {
+        return productRepository.findTop8ByOrderByCreatedOnDesc();
     }
 }

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -21,10 +22,10 @@ public class Product extends BaseEntity {
     private String image;
 
     @Column(name = "price", nullable = false)
-    private BigDecimal price;
+    private Double price;
 
     @Column(name = "promotional_price")
-    private BigDecimal promotionalPrice;
+    private Double promotionalPrice;
 
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
@@ -33,10 +34,12 @@ public class Product extends BaseEntity {
     private Double rating;
 
     @Column(name = "created_on", nullable = false)
-    private LocalDate createdOn;
+    private LocalDateTime createdOn;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Category category;
+
+    private boolean isActive;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
     private List<Comment> comments;
@@ -44,6 +47,7 @@ public class Product extends BaseEntity {
     public Product() {
         this.comments = new ArrayList<>();
         this.rating = 0.00;
+        this.isActive = true;
     }
 
     public String getName() {
@@ -70,19 +74,19 @@ public class Product extends BaseEntity {
         this.image = image;
     }
 
-    public BigDecimal getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    public BigDecimal getPromotionalPrice() {
+    public Double getPromotionalPrice() {
         return promotionalPrice;
     }
 
-    public void setPromotionalPrice(BigDecimal promotionalPrice) {
+    public void setPromotionalPrice(Double promotionalPrice) {
         this.promotionalPrice = promotionalPrice;
     }
 
@@ -102,11 +106,11 @@ public class Product extends BaseEntity {
         this.rating = rating;
     }
 
-    public LocalDate getCreatedOn() {
+    public LocalDateTime getCreatedOn() {
         return createdOn;
     }
 
-    public void setCreatedOn(LocalDate createdOn) {
+    public void setCreatedOn(LocalDateTime createdOn) {
         this.createdOn = createdOn;
     }
 
@@ -116,6 +120,14 @@ public class Product extends BaseEntity {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 
     public List<Comment> getComments() {

@@ -15,4 +15,6 @@ public interface ProductService {
     ProductDetailsViewModel getDetails(Long id);
 
     Product getProductById(Long productId);
+
+    List<Product> findNewProducts();
 }
