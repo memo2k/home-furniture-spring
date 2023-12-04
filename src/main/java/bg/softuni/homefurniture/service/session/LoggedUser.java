@@ -1,8 +1,18 @@
 package bg.softuni.homefurniture.service.session;
 
+import bg.softuni.homefurniture.model.entity.Role;
+import bg.softuni.homefurniture.model.enums.UserRoles;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
+@Getter
+@Setter
 @Component
 @SessionScope
 public class LoggedUser {
@@ -12,37 +22,23 @@ public class LoggedUser {
 
     private String email;
 
+    private Set<Role> roles;
+
     private boolean isLogged;
 
-    public Long getId() {
-        return id;
+    public LoggedUser() {
+        this.roles = new HashSet<>();
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void reset() {
+        this.setId(null);
+        this.setUsername(null);
+        this.setEmail(null);
+        this.setRoles(Collections.emptySet());
+        this.setLogged(false);
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public boolean isLogged() {
-        return isLogged;
-    }
-
-    public void setLogged(boolean logged) {
-        isLogged = logged;
+    public boolean isAdmin() {
+        return this.roles.stream().anyMatch(role -> role.getName().equals(UserRoles.ADMIN));
     }
 }

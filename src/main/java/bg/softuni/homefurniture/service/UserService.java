@@ -8,4 +8,6 @@ public interface UserService {
     User getAuth();
 
     List<User> getAll();
+
+    boolean isUniqueEmail(String value);
 }

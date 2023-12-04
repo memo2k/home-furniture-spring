@@ -1,5 +1,6 @@
 package bg.softuni.homefurniture.service.impl;
 
+import bg.softuni.homefurniture.exceptions.LoginCredentialsException;
 import bg.softuni.homefurniture.model.entity.User;
 import bg.softuni.homefurniture.repository.UserRepository;
 import bg.softuni.homefurniture.service.UserService;
@@ -21,11 +22,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getAuth() {
-        return userRepository.findByEmail(loggedUser.getEmail());
+        final String email = loggedUser.getEmail();
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new LoginCredentialsException("User with email " + email + " is not present"));
     }
 
     @Override
     public List<User> getAll() {
         return userRepository.findAll(Sort.by(Sort.Direction.DESC, "createdOn"));
+    }
+
+    @Override
+    public boolean isUniqueEmail(String email) {
+        return userRepository.findByEmail(email).isEmpty();
     }
 }
