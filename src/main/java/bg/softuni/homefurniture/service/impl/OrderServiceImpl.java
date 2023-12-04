@@ -46,7 +46,9 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void createOrder(CreateOrderBindingModel createOrderBindingModel) {
         Order order = modelMapper.map(createOrderBindingModel, Order.class);
-        User user = userRepository.findByEmail(loggedUser.getEmail());
+
+        // Make validation for creating the order
+        User user = userRepository.findByEmail(loggedUser.getEmail()).orElseThrow();
         Cart cart = user.getCart();
 
         order.setUser(user);
