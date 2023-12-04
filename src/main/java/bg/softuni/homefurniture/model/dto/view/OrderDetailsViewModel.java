@@ -8,6 +8,8 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 public class OrderDetailsViewModel {
+    private Long id;
+
     private String firstName;
 
     private String lastName;
@@ -33,6 +35,14 @@ public class OrderDetailsViewModel {
     private Set<Product> products;
 
     private User user;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getFirstName() {
         return firstName;

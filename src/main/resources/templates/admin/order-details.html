@@ -23,6 +23,7 @@
 
                 <div class="col-lg-4">
                     <p class="font-weight-bold order-details__head">Order details:</p>
+                    <p><i class="fa-solid fa-box"></i> <span th:text="'Order number: #' + ${order.id}"></span></p>
                     <p><i class="fa-solid fa-calendar"></i> <span th:text="'Order made on: ' + ${#temporals.format(order.createdOn, 'SHORT')}"></span></p>
                     <p><i class="fa-solid fa-money-bill"></i> <span th:text="'Total price: $' + ${#numbers.formatDecimal(order.totalPrice, 1, 2)}"></span></p>
 
