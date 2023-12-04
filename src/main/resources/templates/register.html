@@ -7,26 +7,34 @@
 <main>
     <section class="section-auth">
         <div class="shell">
-            <form th:method="POST" th:action="@{/user/register}" class='pad-bg form-auth'>
+            <form th:method="POST" th:action="@{/user/register}" th:object="${userRegisterBindingModel}" class='pad-bg form-auth'>
                 <h1 class="text-center">Register</h1>
                 <div class="form-group">
                   <label for="username">Username</label>
-                  <input type="text" id="username" name="username" class="i-box form-control input-lg" />
+                  <input type="text" id="username" th:errorclass="'is-invalid alert-danger'"
+                         name="username" class="i-box form-control input-lg" required />
+                  <p th:errors="*{username}" th:class="'invalid-feedback'"></p>
                 </div>
 
                 <div class="form-group">
                   <label for="email">Email</label>
-                  <input type="text" id="email" name="email" class="i-box form-control input-lg" />
+                  <input type="text" id="email" th:errorclass="'is-invalid alert-danger'"
+                         name="email" class="i-box form-control input-lg" required />
+                  <p th:errors="*{email}" th:class="'invalid-feedback'"></p>
                 </div>
 
                 <div class="form-group">
                   <label for="password">Password</label>
-                  <input type="password" id="password" name="password" class="form-control input-lg" />
+                  <input type="password" id="password" th:errorclass="'is-invalid alert-danger'"
+                         name="password" class="form-control input-lg" required />
+                  <p th:errors="*{password}" th:class="'invalid-feedback'"></p>
                 </div>
 
                 <div class="form-group">
                   <label for="confirmPassword">Confirm Password</label>
-                  <input type="password" id="confirmPassword" name="confirmPassword" class="form-control input-lg" />
+                  <input type="password" id="confirmPassword" th:errorclass="'is-invalid alert-danger'"
+                         name="confirmPassword" class="form-control input-lg" required />
+                  <p th:errors="*{confirmPassword}" th:class="'invalid-feedback'"></p>
                 </div>
 
                 <button type="submit" class="btn btn-primary my-4">Register</button>

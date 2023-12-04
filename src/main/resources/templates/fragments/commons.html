@@ -76,7 +76,7 @@
 
                 <div class="header__profile">
                     <ul th:if="${@loggedUser.isLogged}">
-                        <li>
+                        <li th:if="${@loggedUser.isAdmin()}">
                             <a th:href="@{/admin/products-list}"><i class="fa-solid fa-user-tie"></i> Admin</a>
                         </li>
 
