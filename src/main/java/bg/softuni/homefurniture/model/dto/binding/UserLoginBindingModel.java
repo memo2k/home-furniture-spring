@@ -1,8 +1,12 @@
 package bg.softuni.homefurniture.model.dto.binding;
 
 import jakarta.validation.constraints.Email;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
+@Getter
+@Setter
 public class UserLoginBindingModel {
     @Email
     private String email;
@@ -10,19 +14,7 @@ public class UserLoginBindingModel {
     @Length(min = 3, max = 20)
     private String password;
 
-    public String getEmail() {
-        return email;
-    }
+    public UserLoginBindingModel() {
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }
