@@ -7,7 +7,7 @@ import bg.softuni.homefurniture.model.entity.User;
 public interface AuthenticationService {
     void register(UserRegisterBindingModel userRegisterBindingModel);
 
-    boolean login(UserLoginBindingModel userLoginBindingModel);
+    void login(UserLoginBindingModel userLoginBindingModel);
 
     void logout();
 

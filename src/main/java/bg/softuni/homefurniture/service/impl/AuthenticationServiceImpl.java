@@ -1,9 +1,11 @@
 package bg.softuni.homefurniture.service.impl;
 
+import bg.softuni.homefurniture.exceptions.LoginCredentialsException;
 import bg.softuni.homefurniture.model.dto.binding.UserLoginBindingModel;
 import bg.softuni.homefurniture.model.dto.binding.UserRegisterBindingModel;
-import bg.softuni.homefurniture.model.entity.Cart;
 import bg.softuni.homefurniture.model.entity.User;
+import bg.softuni.homefurniture.model.enums.UserRoles;
+import bg.softuni.homefurniture.repository.RoleRepository;
 import bg.softuni.homefurniture.repository.UserRepository;
 import bg.softuni.homefurniture.service.AuthenticationService;
 import bg.softuni.homefurniture.service.session.LoggedUser;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
@@ -20,17 +23,21 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
     private final LoggedUser loggedUser;
+    private final RoleRepository roleRepository;
 
-    public AuthenticationServiceImpl(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder, LoggedUser loggedUser) {
+    public AuthenticationServiceImpl(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder, LoggedUser loggedUser, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
         this.loggedUser = loggedUser;
+        this.roleRepository = roleRepository;
     }
 
     @Override
     public void register(UserRegisterBindingModel userRegisterBindingModel) {
         User user = modelMapper.map(userRegisterBindingModel, User.class);
+
+        user.setRoles(Set.of(roleRepository.findByName(UserRoles.USER)));
         user.setPassword(passwordEncoder.encode(userRegisterBindingModel.getPassword()));
         user.setCreatedOn(LocalDateTime.now());
 
@@ -38,27 +45,23 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public boolean login(UserLoginBindingModel userLoginBindingModel) {
-        User user = this.userRepository.findByEmail(userLoginBindingModel.getEmail());
-
+    public void login(UserLoginBindingModel userLoginBindingModel) {
         String email = userLoginBindingModel.getEmail();
 
-        if (user == null) {
-            throw new IllegalArgumentException("User with email " +  email + " does not exist");
-        }
+        User user = this.userRepository.findByEmail(email)
+                .orElseThrow(() -> new LoginCredentialsException("No user found with this email."));
 
         boolean passwordMatch = passwordEncoder.matches(userLoginBindingModel.getPassword(), user.getPassword());
 
-        if (!passwordMatch) {
-            throw new IllegalArgumentException("Password is incorrect");
+        if (!passwordMatch){
+            throw new LoginCredentialsException("Incorrect password.");
         }
 
         loggedUser.setId(user.getId());
         loggedUser.setUsername(user.getUsername());
         loggedUser.setEmail(user.getEmail());
         loggedUser.setLogged(true);
-
-        return true;
+        loggedUser.setRoles(user.getRoles());
     }
 
     @Override
