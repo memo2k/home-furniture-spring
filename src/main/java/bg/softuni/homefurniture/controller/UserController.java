@@ -3,6 +3,7 @@ package bg.softuni.homefurniture.controller;
 import bg.softuni.homefurniture.exceptions.LoginCredentialsException;
 import bg.softuni.homefurniture.model.dto.binding.UserLoginBindingModel;
 import bg.softuni.homefurniture.model.dto.binding.UserRegisterBindingModel;
+import bg.softuni.homefurniture.model.dto.view.UserProfileViewModel;
 import bg.softuni.homefurniture.model.entity.User;
 import bg.softuni.homefurniture.service.AuthenticationService;
 import bg.softuni.homefurniture.service.UserService;
@@ -89,10 +90,10 @@ public class UserController {
 
     @GetMapping("/profile")
     public ModelAndView profile() {
+        UserProfileViewModel userProfile = userService.getUserProfile();
         ModelAndView modelAndView = new ModelAndView("profile");
-        User user = userService.getAuth();
 
-        modelAndView.addObject("user", user);
+        modelAndView.addObject("user", userProfile);
         return modelAndView;
     }
 }
