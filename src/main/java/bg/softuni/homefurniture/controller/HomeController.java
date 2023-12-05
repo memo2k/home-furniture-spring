@@ -1,5 +1,6 @@
 package bg.softuni.homefurniture.controller;
 
+import bg.softuni.homefurniture.model.dto.view.ProductViewModel;
 import bg.softuni.homefurniture.model.entity.Comment;
 import bg.softuni.homefurniture.model.entity.Product;
 import bg.softuni.homefurniture.service.CommentService;
@@ -24,7 +25,7 @@ public class HomeController {
     public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView("index");
 
-        List<Product> products = productService.findNewProducts();
+        List<ProductViewModel> products = productService.findNewProducts();
         List<Comment> comments = commentService.findTopComments();
 
         modelAndView.addObject("products", products);
