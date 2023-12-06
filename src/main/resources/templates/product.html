@@ -58,7 +58,9 @@
 
             <div class="mt-5">
                 <div class="text-dark">
-                    <form th:action="@{/comment/add/{productId}(productId = ${product.id})}" th:method="POST" class="row d-flex">
+                    <form th:action="@{/comment/add/{productId}(productId = ${product.id})}"
+                          th:method="POST"
+                          th:object="${addCommentBindingModel}" class="row d-flex">
                       <div class="col-12">
                         <div class="card">
                           <div class="card-body p-4">
@@ -68,19 +70,21 @@
 
                                   <div class="rating-group">
                                     <label aria-label="1 star" class="rating__label" for="rating-1"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-                                    <input class="rating__input" name="rating" id="rating-1" value="1" type="radio">
+                                    <input class="rating__input" th:errorclass="'is-invalid alert-danger'" name="rating" id="rating-1" value="1" type="radio">
                                     <label aria-label="2 stars" class="rating__label" for="rating-2"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-                                    <input class="rating__input" name="rating" id="rating-2" value="2" type="radio">
+                                    <input class="rating__input" th:errorclass="'is-invalid alert-danger'" name="rating" id="rating-2" value="2" type="radio">
                                     <label aria-label="3 stars" class="rating__label" for="rating-3"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-                                    <input class="rating__input" name="rating" id="rating-3" value="3" type="radio">
+                                    <input class="rating__input" th:errorclass="'is-invalid alert-danger'" name="rating" id="rating-3" value="3" type="radio">
                                     <label aria-label="4 stars" class="rating__label" for="rating-4"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-                                    <input class="rating__input" name="rating" id="rating-4" value="4" type="radio">
+                                    <input class="rating__input" th:errorclass="'is-invalid alert-danger'" name="rating" id="rating-4" value="4" type="radio">
                                     <label aria-label="5 stars" class="rating__label" for="rating-5"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-                                    <input class="rating__input" name="rating" id="rating-5" value="5" type="radio">
+                                    <input class="rating__input" th:errorclass="'is-invalid alert-danger'" name="rating" id="rating-5" value="5" type="radio">
+                                      <p th:errors="*{rating}" th:if="${#fields.hasErrors('rating')}" th:class="'invalid-feedback'"></p>
                                 </div>
 
                                 <div class="form-outline">
-                                  <textarea class="form-control w-100" id="description" name="description" rows="4" cols="30"></textarea>
+                                  <textarea class="form-control w-100" th:errorclass="'is-invalid alert-danger'" id="description" name="description" rows="4" cols="30"></textarea>
+                                    <p th:errors="*{description}" th:if="${#fields.hasErrors('description')}" th:class="'invalid-feedback'"></p>
                                 </div>
 
                                 <div class="d-flex justify-content-between mt-3">

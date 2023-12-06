@@ -22,14 +22,18 @@
                 </tr>
               </thead>
               <tbody>
-                <tr th:each="order : ${orders}">
-                  <th class="align-middle" scope="row" th:text="${order.id}"></th>
+                <tr th:if="${orders.size() > 0}" th:each="order : ${orders}">
+                  <td class="align-middle" scope="row" th:text="${order.id}"></td>
                   <td class="align-middle" th:text="${#temporals.format(order.createdOn, 'dd/MM/yyyy')}"></td>
                   <td class="align-middle" th:text="${order.orderStatus}"></td>
                   <td class="align-middle" th:text="'$' + ${#numbers.formatDecimal(order.totalPrice, 1, 2)}"></td>
                   <td class="align-middle">
                     <a th:href="@{/order-details/{orderId}(orderId = ${order.id})}" class="btn btn-outline-primary">Details</a>
                   </td>
+                </tr>
+
+                <tr th:unless="${orders.size() > 0}">
+                    <td class="align-middle text-center" colspan="5">You don't have any orders.</td>
                 </tr>
               </tbody>
             </table>

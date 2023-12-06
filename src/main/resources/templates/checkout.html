@@ -16,7 +16,7 @@
                     <ul class="list-group mb-3">
                         <li th:each="product : ${products}" class="list-group-item d-flex justify-content-between lh-condensed">
                             <a th:href="@{/product/{id}(id = ${product.id})}">
-                              <img class="shadow" src="/images/product4.jpg" />
+                              <img class="shadow" th:src="${product.imageUrl}" />
                             </a>
 
                             <div>

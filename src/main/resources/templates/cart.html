@@ -18,7 +18,7 @@
                         <tr th:each="product : ${products}" class="align-content-center">
                           <th scope="row" class="section-cart__image">
                               <a th:href="@{/product/{id}(id = ${product.id})}">
-                                  <img class="w-100 shadow" src="/images/product4.jpg" />
+                                  <img class="w-100 shadow" th:src="${product.imageUrl}" />
                               </a>
                           </th>
                           <td class="align-middle" style="max-width: 70%" th:text="${product.name}"></td>

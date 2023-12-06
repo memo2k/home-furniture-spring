@@ -56,7 +56,7 @@
                       <td class="align-middle" th:text="${product.id}"></td>
                       <th scope="row" class="section-cart__image">
                           <a th:href="@{/product/{id}(id = ${product.id})}">
-                              <img class="w-100 shadow" src="/images/product4.jpg" />
+                              <img class="w-100 shadow" th:src="${product.imageUrl}" />
                           </a>
                       </th>
                       <td class="align-middle" th:text="${product.name}"></td>

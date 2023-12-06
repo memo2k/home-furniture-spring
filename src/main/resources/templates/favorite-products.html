@@ -16,7 +16,7 @@
                     <div th:each="product : ${products}" class="favorite-product row border-top p-2">
                         <div class="favorite-product__image col-md-3">
                             <a th:href="@{/product/{id}(id = ${product.id})}">
-                              <img class="w-100 shadow" src="/images/product4.jpg" />
+                              <img class="w-100 shadow" th:src="${product.imageUrl}" />
                             </a>
                         </div>
                         <div class="col-md-9">

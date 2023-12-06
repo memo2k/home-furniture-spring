@@ -34,7 +34,7 @@
                         <div class="card">
                             <div class="card__image">
                                 <a th:href="@{/product/{productId}(productId = ${product.id})}">
-                                    <img src="/images/product3.jpg" alt="">
+                                    <img th:src="${product.imageUrl}" alt="">
                                 </a>
                             </div>
 
@@ -88,7 +88,7 @@
                             </div>
 
                             <div class="card__profile-name">
-                                <p th:text="${comment.author}"></p>
+                                <p th:text="${comment.author.username}"></p>
                             </div>
 
                             <div class="card__posted-on">
