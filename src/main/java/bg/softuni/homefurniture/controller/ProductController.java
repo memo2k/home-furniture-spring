@@ -1,5 +1,6 @@
 package bg.softuni.homefurniture.controller;
 
+import bg.softuni.homefurniture.model.dto.binding.AddCommentBindingModel;
 import bg.softuni.homefurniture.model.dto.binding.AddProductBindingModel;
 import bg.softuni.homefurniture.model.dto.view.ProductViewModel;
 import bg.softuni.homefurniture.model.dto.view.ProductDetailsViewModel;
@@ -32,8 +33,12 @@ public class ProductController {
     }
 
     @GetMapping("/product/{id}")
-    public ModelAndView singleProduct(@PathVariable Long id) {
+    public ModelAndView singleProduct(@PathVariable Long id, Model model) {
         ModelAndView modelAndView = new ModelAndView("product");
+
+        if (!model.containsAttribute("addCommentBindingModel")) {
+            model.addAttribute("addCommentBindingModel", new AddCommentBindingModel());
+        }
 
         ProductDetailsViewModel product = productService.getDetails(id);
         List<Comment> comments = commentService.orderCommentsByDateDesc(product.getComments());
@@ -50,6 +55,21 @@ public class ProductController {
         List<ProductViewModel> products = productService.getAll();
 
         modelAndView.addObject("products", products);
+
+        return modelAndView;
+    }
+
+    @GetMapping("/all-products/{categoryName}")
+    public ModelAndView getAllProductsByCategory(@PathVariable("categoryName") CategoryName categoryName) {
+        // TODO fix! not working properly
+        CategoryName category = CategoryName.valueOf(categoryName.name());
+
+        List<ProductViewModel> products = productService.getAllByCategory(category);
+
+        ModelAndView modelAndView = new ModelAndView("all-products");
+
+        modelAndView.addObject("products", products);
+        modelAndView.addObject("categoryName", categoryName);
 
         return modelAndView;
     }
