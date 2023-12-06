@@ -4,6 +4,7 @@ import bg.softuni.homefurniture.model.dto.binding.AddProductBindingModel;
 import bg.softuni.homefurniture.model.dto.view.ProductViewModel;
 import bg.softuni.homefurniture.model.dto.view.ProductDetailsViewModel;
 import bg.softuni.homefurniture.model.entity.Product;
+import bg.softuni.homefurniture.model.enums.CategoryName;
 
 import java.util.List;
 
@@ -17,4 +18,6 @@ public interface ProductService {
     Product getProductById(Long productId);
 
     List<ProductViewModel> findNewProducts();
+
+    List<ProductViewModel> getAllByCategory(CategoryName categoryName);
 }

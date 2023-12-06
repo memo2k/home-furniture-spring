@@ -5,6 +5,7 @@ import bg.softuni.homefurniture.model.dto.binding.AddProductBindingModel;
 import bg.softuni.homefurniture.model.dto.view.ProductViewModel;
 import bg.softuni.homefurniture.model.dto.view.ProductDetailsViewModel;
 import bg.softuni.homefurniture.model.entity.Product;
+import bg.softuni.homefurniture.model.enums.CategoryName;
 import bg.softuni.homefurniture.repository.ProductRepository;
 import bg.softuni.homefurniture.service.ProductService;
 import org.modelmapper.ModelMapper;
@@ -59,6 +60,13 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductViewModel> findNewProducts() {
         return productRepository.findTop8ByOrderByCreatedOnDesc().stream()
+                .map(product -> modelMapper.map(product, ProductViewModel.class))
+                .toList();
+    }
+
+    @Override
+    public List<ProductViewModel> getAllByCategory(CategoryName categoryName) {
+        return productRepository.findAllByCategory(categoryName).stream()
                 .map(product -> modelMapper.map(product, ProductViewModel.class))
                 .toList();
     }
