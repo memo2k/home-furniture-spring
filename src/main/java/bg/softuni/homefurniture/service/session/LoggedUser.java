@@ -41,4 +41,12 @@ public class LoggedUser {
     public boolean isAdmin() {
         return this.roles.stream().anyMatch(role -> role.getName().equals(UserRoles.ADMIN));
     }
+
+    public boolean isUser() {
+        return this.roles.stream().anyMatch(role -> role.getName().equals(UserRoles.USER));
+    }
+
+    public boolean isUserOnly() {
+        return this.roles.stream().allMatch(role -> role.getName().equals(UserRoles.USER));
+    }
 }

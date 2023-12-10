@@ -41,10 +41,10 @@
                 </div>
 
                 <div class="header__search">
-                    <form action="" class="d-flex">
-                        <input type="search" placeholder="Search..." value="">
+                    <form th:action="@{/products}" th:method="GET" class="d-flex">
+                        <input type="search" name="keyword" placeholder="Search..." value="">
 
-                        <button class="button button--search">
+                        <button type="submit" class="button button--search">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
                     </form>
@@ -54,23 +54,23 @@
             <div class="header__bottom" id="header_bottom">
                 <nav class="header__categories">
                     <ul>
-                        <li><a th:href="@{/all-products/KITCHEN}">Kitchen</a></li>
+                        <li><a th:href="@{/products/KITCHEN}">Kitchen</a></li>
 
-                        <li><a th:href="@{/all-products/BEDROOM}">Bedroom</a></li>
+                        <li><a th:href="@{/products/BEDROOM}">Bedroom</a></li>
 
-                        <li><a th:href="@{/all-products/LIVING_ROOM}">Living room</a></li>
+                        <li><a th:href="@{/products/LIVING_ROOM}">Living room</a></li>
 
-                        <li><a th:href="@{/all-products/DINING_ROOM}">Dining room</a></li>
+                        <li><a th:href="@{/products/DINING_ROOM}">Dining room</a></li>
 
-                        <li><a th:href="@{/all-products/MATTRESS}">Mattresses</a></li>
+                        <li><a th:href="@{/products/MATTRESS}">Mattresses</a></li>
 
-                        <li><a th:href="@{/all-products/GARDEN}">Garden</a></li>
+                        <li><a th:href="@{/products/GARDEN}">Garden</a></li>
 
-                        <li><a th:href="@{/all-products/OFFICE}">Office</a></li>
+                        <li><a th:href="@{/products/OFFICE}">Office</a></li>
 
-                        <li><a th:href="@{/all-products/DECORATION}">Decoration</a></li>
+                        <li><a th:href="@{/products/DECORATION}">Decoration</a></li>
 
-                        <li><a th:href="@{/all-products}">See All</a></li>
+                        <li><a th:href="@{/products}">See All</a></li>
                     </ul>
                 </nav>
 

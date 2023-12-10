@@ -1,7 +1,9 @@
 package bg.softuni.homefurniture.service.impl;
 
 import bg.softuni.homefurniture.exceptions.UserNotFoundException;
+import bg.softuni.homefurniture.model.dto.binding.EditUserBindingModel;
 import bg.softuni.homefurniture.model.dto.view.UserProfileViewModel;
+import bg.softuni.homefurniture.model.dto.view.UserViewModel;
 import bg.softuni.homefurniture.model.entity.User;
 import bg.softuni.homefurniture.repository.UserRepository;
 import bg.softuni.homefurniture.service.UserService;
@@ -32,18 +34,37 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAll() {
-        return userRepository.findAll(Sort.by(Sort.Direction.DESC, "createdOn"));
-    }
-
-    @Override
-    public boolean isUniqueEmail(String email) {
-        return userRepository.findByEmail(email).isEmpty();
+    public List<UserViewModel> getAll() {
+        return userRepository.findAllByOrderByCreatedOnDesc().stream()
+                .map(user -> modelMapper.map(user, UserViewModel.class))
+                .toList();
     }
 
     @Override
     public UserProfileViewModel getUserProfile() {
         User user = this.getAuth();
         return modelMapper.map(user, UserProfileViewModel.class);
+    }
+
+    @Override
+    public EditUserBindingModel findById(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("User with id " + id + " is not present"));
+
+        return modelMapper.map(user, EditUserBindingModel.class);
+    }
+
+    @Override
+    public void editUser(EditUserBindingModel editUserBindingModel) {
+        User user = userRepository.findById(editUserBindingModel.getId())
+                .orElseThrow(() -> new UserNotFoundException("User with id " + editUserBindingModel.getId() + " is not present"));
+
+        modelMapper.map(editUserBindingModel, user);
+        userRepository.save(user);
+    }
+
+    @Override
+    public boolean isUniqueEmail(String email) {
+        return userRepository.findByEmail(email).isEmpty();
     }
 }

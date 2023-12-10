@@ -26,57 +26,8 @@ import java.util.Set;
 
 @Configuration
 public class AppConfig {
-    private final CategoryRepository categoryRepository;
-    private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
-
-    public AppConfig (CategoryRepository categoryRepository, UserRepository userRepository, RoleRepository roleRepository) {
-        this.categoryRepository = categoryRepository;
-        this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
-    }
-
     @Bean
     public ModelMapper modelMapper () {
-//
-//        final ModelMapper modelMapper = new ModelMapper();
-//
-//        //AddRouteBindingModel -> Route
-//        Provider<User> loggedUserProvider = req -> userService.getAuth();
-//
-//        Converter<Set<CategoryName>, Set<Category>> toEntitySet
-//                = ctx -> (ctx.getSource() == null)
-//                ? null
-//                : categoryService.getAllByNameIn(ctx.getSource());
-//
-////        modelMapper
-////                .createTypeMap(AddProductBindingModel.class, Product.class)
-////                .addMappings(mapper -> mapper
-////                        .using(toEntitySet)
-////                        .map(AddProductBindingModel::getCategoryName, Product::setCategory));
-//
-//        // UserRegisterBindingModel -> User
-//        Provider<User> newUserProvider = req -> {
-//            User user = new User();
-//            user.setRoles(Set.of(roleService.getRoleByName("USER")));
-//            user.setCreatedOn(LocalDateTime.now());
-//            return user;
-//        };
-//
-//        Converter<String, String> passwordConverter
-//                = ctx -> (ctx.getSource() == null)
-//                ? null
-//                : passwordEncoder().encode(ctx.getSource());
-//
-//        modelMapper
-//                .createTypeMap(UserRegisterBindingModel.class, User.class)
-//                .setProvider(newUserProvider)
-//                .addMappings(mapper -> mapper
-//                        .using(passwordConverter)
-//                        .map(UserRegisterBindingModel::getPassword, User::setPassword));
-//
-//        return modelMapper;
-
         return new ModelMapper();
     }
     @Bean

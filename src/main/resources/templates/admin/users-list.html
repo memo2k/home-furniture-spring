@@ -23,15 +23,17 @@
                 </tr>
               </thead>
               <tbody>
-                <tr th:each="user: ${users}" class="align-content-center">
+                <tr th:each="user : ${users}" class="align-content-center">
                   <td class="align-middle" th:text="${user.id}"></td>
                   <td class="align-middle" th:text="${user.username}"></td>
                   <td class="align-middle" th:text="${user.email}"></td>
                   <td class="align-middle" th:text="${user.orders.size()}"></td>
-                  <td class="align-middle">Yes</td>
                   <td class="align-middle">
-                    <button class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i></button>
+                      <span th:each="role : ${user.roles}" th:text="${role.name} + ' '"></span>
                   </td>
+                    <td>
+                      <a th:href="@{/admin/edit-user/{id}(id=${user.id})}" class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i></a>
+                    </td>
                 </tr>
               </tbody>
             </table>

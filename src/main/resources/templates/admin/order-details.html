@@ -29,12 +29,17 @@
 
                     <div class="mt-3">
                         <p>Status:</p>
-                        <select class="custom-select" id="category" name="categoryName" aria-label="Default select example">
-                            <option selected disabled th:text="${order.orderStatus}"> /option>
-    <!--                        <option th:each="category : ${T(bg.softuni.homefurniture.model.enums.CategoryName).values()}"-->
-    <!--                                th:text="${category}"-->
-    <!--                                th:value="${category}"></option>-->
-                        </select>
+
+                        <form id="orderForm" th:action="@{/admin/order-details/{id}(id=${order.id})}" th:method="POST" class="d-flex">
+                            <select class="custom-select mr-2" id="orderSelect" name="orderStatus" aria-label="Default select example">
+                                <option selected disabled th:text="${order.orderStatus}"></option>
+                                <option th:each="orderStatus : ${T(bg.softuni.homefurniture.model.enums.OrderStatus).values()}"
+                                        th:text="${orderStatus}"
+                                        th:value="${orderStatus}"></option>
+
+                            </select>
+                            <input type="submit" value="Save" class="btn btn-primary">
+                        </form>
                     </div>
                 </div>
 

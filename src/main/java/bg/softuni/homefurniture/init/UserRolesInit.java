@@ -4,6 +4,8 @@ import bg.softuni.homefurniture.model.entity.Role;
 import bg.softuni.homefurniture.model.enums.UserRoles;
 import bg.softuni.homefurniture.repository.RoleRepository;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -11,6 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Component
+@Order(Ordered.HIGHEST_PRECEDENCE)
 public class UserRolesInit implements CommandLineRunner {
     private final RoleRepository roleRepository;
 

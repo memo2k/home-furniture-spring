@@ -1,11 +1,13 @@
 package bg.softuni.homefurniture.service.impl;
 
+import bg.softuni.homefurniture.exceptions.OrderNotFoundException;
 import bg.softuni.homefurniture.model.dto.binding.CreateOrderBindingModel;
 import bg.softuni.homefurniture.model.dto.view.OrderDetailsViewModel;
 import bg.softuni.homefurniture.model.entity.Cart;
 import bg.softuni.homefurniture.model.entity.Order;
 import bg.softuni.homefurniture.model.entity.Product;
 import bg.softuni.homefurniture.model.entity.User;
+import bg.softuni.homefurniture.model.enums.OrderStatus;
 import bg.softuni.homefurniture.repository.CartRepository;
 import bg.softuni.homefurniture.repository.OrderRepository;
 import bg.softuni.homefurniture.repository.ProductRepository;
@@ -69,9 +71,18 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDetailsViewModel getDetails(Long orderId) {
-        Optional<Order> order = orderRepository.findById(orderId);
-//                .orElseThrow(() -> new ProductNotFoundException("Product not found."));
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new OrderNotFoundException("Order not found."));
 
         return modelMapper.map(order, OrderDetailsViewModel.class);
+    }
+
+    @Override
+    public void updateOrderStatus(Long orderId, OrderStatus orderStatus) {
+        Order optionalOrder = orderRepository.findById(orderId)
+                .orElseThrow(() -> new OrderNotFoundException("Order not found."));
+
+        optionalOrder.setOrderStatus(orderStatus);
+        orderRepository.save(optionalOrder);
     }
 }

@@ -34,44 +34,65 @@ public class FavoriteController {
 
     @GetMapping("/list")
     public ModelAndView favoriteProducts() {
-        ModelAndView modelAndView = new ModelAndView("favorite-products");
+        ModelAndView modelAndView = new ModelAndView();
 
-        User user = authenticationService.getUserById(loggedUser.getId());
-        Favorite favorite = favoriteService.getUserFavoritesList(user.getId());
+        if (!loggedUser.isLogged()) {
+            modelAndView.setViewName("redirect:/user/login");
+        } else {
+            modelAndView.setViewName("favorite-products");
 
-        if (favorite != null) {
-            Set<Product> products = favorite.getProducts();
-            modelAndView.addObject("products", products);
+            User user = authenticationService.getUserById(loggedUser.getId());
+            Favorite favorite = favoriteService.getUserFavoritesList(user.getId());
+
+            if (favorite != null) {
+                Set<Product> products = favorite.getProducts();
+                modelAndView.addObject("products", products);
+            }
         }
+
         return modelAndView;
     }
 
     @PostMapping("/add/{productId}")
     public ModelAndView addProductToFavorites(@PathVariable Long productId) {
-        System.out.println("productId is not null");
-        User user = authenticationService.getUserById(loggedUser.getId());
+        ModelAndView modelAndView = new ModelAndView();
 
-        Favorite favorite = favoriteService.getUserFavoritesList(user.getId());
-        if (favorite == null) {
-            favorite = new Favorite();
-            favorite.setUser(user);
+        if (!loggedUser.isLogged()) {
+            modelAndView.setViewName("redirect:/user/login");
+        } else {
+            User user = authenticationService.getUserById(loggedUser.getId());
+
+            Favorite favorite = favoriteService.getUserFavoritesList(user.getId());
+            if (favorite == null) {
+                favorite = new Favorite();
+                favorite.setUser(user);
+            }
+
+            Product product = productService.getProductById(productId);
+            favoriteService.addProductToFavoritesList(favorite, product);
+
+            modelAndView.setViewName("redirect:/favorite-products/list");
         }
 
-        Product product = productService.getProductById(productId);
-
-        favoriteService.addProductToFavoritesList(favorite, product);
-
-        return new ModelAndView("redirect:/favorite-products/list");
+        return modelAndView;
     }
 
     @PostMapping("/remove/{productId}")
     public ModelAndView removeProduct(@PathVariable Long productId) {
-        User user = userService.getAuth();
-        Favorite favorite = favoriteService.getUserFavoritesList(user.getId());
-        Product product = productService.getProductById(productId);
+        ModelAndView modelAndView = new ModelAndView();
 
-        favoriteService.removeProductFromFavorites(favorite, product);
+        if (!loggedUser.isLogged()) {
+            modelAndView.setViewName("redirect:/user/login");
+        } else {
+            User user = userService.getAuth();
+            Favorite favorite = favoriteService.getUserFavoritesList(user.getId());
+            Product product = productService.getProductById(productId);
 
-        return new ModelAndView("redirect:/favorite-products/list");
+            favoriteService.removeProductFromFavorites(favorite, product);
+
+            modelAndView.setViewName("redirect:/favorite-products/list");
+        }
+
+        return modelAndView;
     }
 }

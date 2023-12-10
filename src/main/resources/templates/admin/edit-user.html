@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/admin-nav::head}"></head>
+<body>
+<header th:replace="~{fragments/admin-nav::header}"></header>
+<main>
+    <div style="margin: 100px auto">
+        <form class="form-product" th:action="@{/admin/edit-user/{id}(id=${editUserBindingModel.id})}" th:method="POST" th:object="${editUserBindingModel}">
+            <h1 class="text-center">Edit User Details</h1>
+
+          <div class="form-group mt-5">
+            <label for="username">Username</label>
+            <input type="text" th:field="*{username}" class="form-control" id="username" name="username" th:errorclass="'is-invalid alert-danger'">
+              <p th:errors="*{username}" th:class="'invalid-feedback'"></p>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" th:field="*{email}" class="form-control" id="email" th:errorclass="'is-invalid alert-danger'" name="email">
+              <p th:errors="*{email}" th:class="'invalid-feedback'"></p>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
+    </div>
+</main>
+<footer th:replace="~{fragments/commons::footer}"></footer>
+</body>
+</html>

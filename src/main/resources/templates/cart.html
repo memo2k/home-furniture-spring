@@ -48,20 +48,20 @@
                     <div class="my-3" th:text="'Total: $' + ${#numbers.formatDecimal(cart.totalPrice, 1, 2)}"></div>
 
                     <a th:href="@{/checkout}" class="btn btn-success text-white">Continue to Checkout</a>
-                    <a th:href="@{/all-products}" class="btn btn-primary">Continue Shopping</a>
+                    <a th:href="@{/products}" class="btn btn-primary">Continue Shopping</a>
                 </div>
 
                 <div th:unless="${products.size() > 0}">
                     <div>Your cart is empty.</div>
 
-                    <a th:href="@{/all-products}" class="btn btn-primary mt-5">Continue Shopping</a>
+                    <a th:href="@{/products}" class="btn btn-primary mt-5">Continue Shopping</a>
                 </div>
             </div>
 
             <div th:unless="${products != null}">
                 <div>Your cart is empty.</div>
 
-                <a th:href="@{/all-products}" class="btn btn-primary mt-5">Continue Shopping</a>
+                <a th:href="@{/products}" class="btn btn-primary mt-5">Continue Shopping</a>
             </div>
         </div>
     </section>

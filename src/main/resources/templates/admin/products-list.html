@@ -21,7 +21,6 @@
                   <th scope="col">Name</th>
                   <th scope="col">Price</th>
                   <th scope="col">Quantity</th>
-                  <th scope="col">Active?</th>
                   <th scope="col">Actions</th>
                 </tr>
               </thead>
@@ -47,9 +46,8 @@
                       </div>
                   </td>
                   <td class="align-middle" th:text="${product.quantity}"></td>
-                  <td class="align-middle">Yes</td>
                   <td class="align-middle">
-                    <button class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i></button>
+                    <a th:href="@{/admin/edit-product/{id}(id = ${product.id})}" class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i></a>
                   </td>
                 </tr>
                 <tr th:unless="${products.size() > 0}">

@@ -2,8 +2,6 @@ package bg.softuni.homefurniture.model.dto.binding;
 
 import bg.softuni.homefurniture.model.entity.Category;
 import bg.softuni.homefurniture.model.enums.CategoryName;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,17 +11,19 @@ import java.math.BigDecimal;
 
 @Getter
 @Setter
-public class AddProductBindingModel {
+public class EditProductBindingModel {
+    private Long id;
+
     @Length(min = 3, message = "Product name must be at least 3 characters long.")
-    @NotBlank(message = "Name is required.")
+    @NotNull(message = "Name is required.")
     private String name;
 
     @Pattern(regexp = "(https?:)?//?[^\\'\"\"<>]+?\\.(jpg|jpeg|gif|png)", message = "Image URL is not valid.")
-    @NotBlank(message = "Image is required.")
+    @NotNull(message = "Image is required.")
     private String imageUrl;
 
     @Length(max = 255, message = "Description must be no more than 255 characters long.")
-    @NotBlank(message = "Description is required.")
+    @NotNull(message = "Description is required.")
     private String description;
 
     @Positive(message = "Price must be a positive value.")
@@ -40,7 +40,7 @@ public class AddProductBindingModel {
     @NotNull(message = "Category is required.")
     private String categoryName;
 
-    public AddProductBindingModel() {
+    public EditProductBindingModel() {
 
     }
 }

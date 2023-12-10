@@ -7,24 +7,12 @@
 <main>
     <section class="section-all-products mt-5">
         <div class="shell">
-            <div class="section__title mb-2 d-lg-flex justify-content-between">
+            <div class="section__title mb-5">
                 <h3>All Products</h3>
-
-                <div class="dropdown">
-                  <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Top products
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Top products</a>
-                    <a class="dropdown-item" href="#">Latest</a>
-                    <a class="dropdown-item" href="#">Lowest price</a>
-                    <a class="dropdown-item" href="#">Highest price</a>
-                  </div>
-                </div>
             </div>
 
             <div class="section__cards">
-                <div class="grid grid-no-gutter">
+                <div th:if="${products.size() > 0}" class="grid grid-no-gutter">
                     <div th:each="product : ${products}" class="grid__col grid__col--1of4">
                         <div class="card">
                             <div class="card__image">
@@ -51,6 +39,10 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div th:unless="${products.size() > 0}" class="text-center">
+                    <h1>No products yet.</h1>
                 </div>
             </div>
         </div>

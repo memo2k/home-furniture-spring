@@ -40,10 +40,8 @@ public class Product extends BaseEntity {
     @Column(name = "created_on", nullable = false)
     private LocalDateTime createdOn;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private Category category;
-
-    private boolean isActive;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
     private List<Comment> comments;
@@ -51,6 +49,5 @@ public class Product extends BaseEntity {
     public Product() {
         this.comments = new ArrayList<>();
         this.rating = 0.00;
-        this.isActive = true;
     }
 }

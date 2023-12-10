@@ -20,17 +20,13 @@ public class CommentController {
     public static final String BINDING_RESULT_PATH = "org.springframework.validation.BindingResult";
     public static final String DOT = ".";
     private final ProductService productService;
-    private final AuthenticationService authenticationService;
     private final UserService userService;
-    private final FavoriteService favoriteService;
     private final LoggedUser loggedUser;
     private final CommentService commentService;
 
-    public CommentController(ProductService productService, AuthenticationService authenticationService, UserService userService, FavoriteService favoriteService, LoggedUser loggedUser, CommentService commentService) {
+    public CommentController(ProductService productService, UserService userService, LoggedUser loggedUser, CommentService commentService) {
         this.productService = productService;
-        this.authenticationService = authenticationService;
         this.userService = userService;
-        this.favoriteService = favoriteService;
         this.loggedUser = loggedUser;
         this.commentService = commentService;
     }
@@ -42,18 +38,22 @@ public class CommentController {
                                    @PathVariable Long productId) {
         ModelAndView modelAndView = new ModelAndView();
 
-        if (bindingResult.hasErrors()) {
-            final String attributeName = "addCommentBindingModel";
-            redirectAttributes
-                    .addFlashAttribute(attributeName, addCommentBindingModel)
-                    .addFlashAttribute(BINDING_RESULT_PATH + DOT + attributeName, bindingResult);
-            modelAndView.setViewName("redirect:/product/" + productId);
+        if (!loggedUser.isLogged()) {
+            modelAndView.setViewName("redirect:/user/login");
         } else {
-            User user = userService.getAuth();
-            Product product = productService.getProductById(productId);
+            if (bindingResult.hasErrors()) {
+                final String attributeName = "addCommentBindingModel";
+                redirectAttributes
+                        .addFlashAttribute(attributeName, addCommentBindingModel)
+                        .addFlashAttribute(BINDING_RESULT_PATH + DOT + attributeName, bindingResult);
+                modelAndView.setViewName("redirect:/product/" + productId);
+            } else {
+                User user = userService.getAuth();
+                Product product = productService.getProductById(productId);
 
-            commentService.addCommentToProduct(user, product, addCommentBindingModel);
-            modelAndView.setViewName("redirect:/product/" + productId);
+                commentService.addCommentToProduct(user, product, addCommentBindingModel);
+                modelAndView.setViewName("redirect:/product/" + productId);
+            }
         }
 
         return modelAndView;

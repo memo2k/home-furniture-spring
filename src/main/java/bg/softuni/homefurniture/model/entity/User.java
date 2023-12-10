@@ -30,9 +30,6 @@ public class User extends BaseEntity {
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST)
     private Cart cart;
-//
-//    @OneToMany(mappedBy = "user")
-//    private Set<Favorite> favoriteProducts;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
