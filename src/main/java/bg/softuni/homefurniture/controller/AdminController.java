@@ -66,7 +66,7 @@ public class AdminController {
         return modelAndView;
     }
 
-    @PostMapping("/admin/edit-product/{id}")
+    @PostMapping("/edit-user/{id}")
     public ModelAndView editUser(@PathVariable Long id,
                                     @Valid EditUserBindingModel editUserBindingModel,
                                     BindingResult bindingResult,

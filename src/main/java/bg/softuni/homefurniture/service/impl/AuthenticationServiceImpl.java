@@ -1,6 +1,7 @@
 package bg.softuni.homefurniture.service.impl;
 
 import bg.softuni.homefurniture.exceptions.LoginCredentialsException;
+import bg.softuni.homefurniture.exceptions.UserNotFoundException;
 import bg.softuni.homefurniture.model.dto.binding.UserLoginBindingModel;
 import bg.softuni.homefurniture.model.dto.binding.UserRegisterBindingModel;
 import bg.softuni.homefurniture.model.entity.User;
@@ -74,8 +75,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public User getUserById(Long id) {
-        Optional<User> user = userRepository.findById(id);
-//                .orElseThrow(() -> new ProductNotFoundException("Product not found."));
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("User not found."));
 
         return modelMapper.map(user, User.class);
     }

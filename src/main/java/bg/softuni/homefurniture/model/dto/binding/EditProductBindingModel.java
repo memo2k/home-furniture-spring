@@ -22,7 +22,7 @@ public class EditProductBindingModel {
     @NotNull(message = "Image is required.")
     private String imageUrl;
 
-    @Length(max = 255, message = "Description must be no more than 255 characters long.")
+    @Length(max = 1000, message = "Description must be no more than 255 characters long.")
     @NotNull(message = "Description is required.")
     private String description;
 

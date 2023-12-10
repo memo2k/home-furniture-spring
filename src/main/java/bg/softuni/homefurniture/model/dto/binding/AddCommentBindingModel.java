@@ -11,7 +11,7 @@ import org.hibernate.validator.constraints.Length;
 @Setter
 public class AddCommentBindingModel {
     @NotBlank(message = "You must type something.")
-    @Length(max = 255, message = "Comment is too long.")
+    @Length(max = 1000, message = "Comment is too long.")
     private String description;
 
     @Valid

@@ -23,15 +23,11 @@ import java.util.stream.Collectors;
 public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
     private final ProductRepository productRepository;
-    private final UserRepository userRepository;
-    private final LoggedUser loggedUser;
     private final ModelMapper modelMapper;
 
-    public CommentServiceImpl(CommentRepository commentRepository, ProductRepository productRepository, UserRepository userRepository, LoggedUser loggedUser, ModelMapper modelMapper) {
+    public CommentServiceImpl(CommentRepository commentRepository, ProductRepository productRepository, ModelMapper modelMapper) {
         this.commentRepository = commentRepository;
         this.productRepository = productRepository;
-        this.userRepository = userRepository;
-        this.loggedUser = loggedUser;
         this.modelMapper = modelMapper;
     }
 
@@ -42,7 +38,6 @@ public class CommentServiceImpl implements CommentService {
         comment.setProduct(product);
         comment.setCreatedOn(LocalDateTime.now());
 
-        // Recalculates average rating of product
         double currentRating = product.getRating();
         int totalComments = product.getComments().size();
         double newRating = ((currentRating * totalComments) + comment.getRating()) / (totalComments + 1);
@@ -62,5 +57,10 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public List<Comment> findTopComments() {
         return commentRepository.findTop3ByOrderByRatingDesc();
+    }
+
+    @Override
+    public void deleteComment(Long id) {
+        commentRepository.deleteById(id);
     }
 }

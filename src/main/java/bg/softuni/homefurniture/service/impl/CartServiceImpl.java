@@ -50,8 +50,6 @@ public class CartServiceImpl implements CartService {
 
             cart.setTotalPrice(cart.getTotalPrice() + price);
             cartRepository.save(cart);
-        } else {
-
         }
     }
 

@@ -129,6 +129,12 @@
                                     </div>
                                     <p class="mb-0" th:text="${comment.description}">
                                     </p>
+
+<!--                                      <div th:if="${@loggedUser.isAdmin()}">-->
+<!--                                          <form th:action="@{/comment/{productId}/delete/{id}(productId=${product.id}, id=${comment.id})}" th:method="DELETE">-->
+<!--                                              <button type="submit" class="btn btn-danger my-2" th:text="'Delete'"></button>-->
+<!--                                          </form>-->
+<!--                                      </div>-->
                                   </div>
                                 </div>
 

@@ -8,9 +8,7 @@ import bg.softuni.homefurniture.service.session.LoggedUser;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -54,6 +52,23 @@ public class CommentController {
                 commentService.addCommentToProduct(user, product, addCommentBindingModel);
                 modelAndView.setViewName("redirect:/product/" + productId);
             }
+        }
+
+        return modelAndView;
+    }
+
+    @DeleteMapping("/{productId}/delete/{id}")
+    public ModelAndView deleteComment(@PathVariable("productId") Long productId,
+                                      @PathVariable("id") Long id) {
+        ModelAndView modelAndView = new ModelAndView();
+
+        if (!loggedUser.isLogged()) {
+            modelAndView.setViewName("redirect:/user/login");
+        } else if (!loggedUser.isAdmin()) {
+            modelAndView.setViewName("redirect:/");
+        } else {
+            commentService.deleteComment(id);
+            modelAndView.setViewName("redirect:/product/" + productId);
         }
 
         return modelAndView;

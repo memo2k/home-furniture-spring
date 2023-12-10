@@ -13,4 +13,6 @@ public interface CommentService {
     List<Comment> orderCommentsByDateDesc(List<Comment> comments);
 
     List<Comment> findTopComments();
+
+    void deleteComment(Long id);
 }

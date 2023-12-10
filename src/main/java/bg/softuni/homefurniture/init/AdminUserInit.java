@@ -6,7 +6,6 @@ import bg.softuni.homefurniture.model.enums.UserRoles;
 import bg.softuni.homefurniture.repository.RoleRepository;
 import bg.softuni.homefurniture.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.crypto.password.PasswordEncoder;

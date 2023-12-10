@@ -64,8 +64,13 @@ public class OrderController {
     public ModelAndView checkout(Model model) {
         ModelAndView modelAndView = new ModelAndView();
 
+        User user = authenticationService.getUserById(loggedUser.getId());
+        Cart cart = user.getCart();
+
         if (!loggedUser.isLogged()) {
             modelAndView.setViewName("redirect:/user/login");
+        } else if (cart.getProducts().isEmpty()) {
+            modelAndView.setViewName("redirect:/");
         } else {
             modelAndView.setViewName("checkout");
 
@@ -73,8 +78,6 @@ public class OrderController {
                 model.addAttribute("createOrderBindingModel", new CreateOrderBindingModel());
             }
 
-            User user = authenticationService.getUserById(loggedUser.getId());
-            Cart cart = user.getCart();
             Set<Product> products = cart.getProducts();
 
             modelAndView.addObject("cart", cart);

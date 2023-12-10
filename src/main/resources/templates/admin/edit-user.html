@@ -11,14 +11,8 @@
 
           <div class="form-group mt-5">
             <label for="username">Username</label>
-            <input type="text" th:field="*{username}" class="form-control" id="username" name="username" th:errorclass="'is-invalid alert-danger'">
+            <input type="text" th:field="*{username}" th:value="${editUserBindingModel.username}" class="form-control" id="username" name="username" th:errorclass="'is-invalid alert-danger'">
               <p th:errors="*{username}" th:class="'invalid-feedback'"></p>
-          </div>
-
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" th:field="*{email}" class="form-control" id="email" th:errorclass="'is-invalid alert-danger'" name="email">
-              <p th:errors="*{email}" th:class="'invalid-feedback'"></p>
           </div>
 
           <button type="submit" class="btn btn-primary">Save Changes</button>
